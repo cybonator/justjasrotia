@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS Jasrotia | Navigating Officer & Digital Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0D1B2A;
+            --teal: #16DB93;
+            --light-navy: #1B263B;
+            --gray: #E0E1DD;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--navy);
+            color: white;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .text-teal {
+            color: var(--teal);
+        }
+        
+        .bg-teal {
+            background-color: var(--teal);
+        }
+        
+        .border-teal {
+            border-color: var(--teal);
+        }
+        
+        .hero-overlay {
+            background: rgba(13, 27, 42, 0.7);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--teal);
+        }
+        
+        .skill-chip {
+            background: var(--light-navy);
+            border: 1px solid rgba(22, 219, 147, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-chip:hover {
+            transform: translateY(-5px);
+            border-color: var(--teal);
+            box-shadow: 0 10px 15px -3px rgba(22, 219, 147, 0.1);
+        }
+        
+        .project-card {
+            background: var(--light-navy);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(22, 219, 147, 0.1);
+        }
+        
+        .consultation-card {
+            background: rgba(22, 219, 147, 0.05);
+            border: 1px solid rgba(22, 219, 147, 0.2);
+        }
+        
+        .calculator-container {
+            background: var(--light-navy);
+            border-radius: 10px;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--teal);
+            color: var(--navy);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 70%;
+            background: var(--light-navy);
+            z-index: 100;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+        }
+        
+        .mobile-overlay.open {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-video {
+                display: none;
+            }
+            
+            .hero-image {
+                display: block;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .project-card {
+                max-width: 100%;
+            }
+            
+            .consultation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+        
+        .social-link {
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: var(--teal);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--teal);
+        }
+        
+        .instagram-cta {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .instagram-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(225, 48, 108, 0.3);
+        }
+        
+        .instagram-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .instagram-icon {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-btn fixed top-4 right-4 z-50 text-2xl text-teal md:hidden">
+        <i class="fas fa-bars" id="menu-toggle"></i>
+    </div>
+    
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="text-right mb-8">
+            <i class="fas fa-times text-2xl text-teal" id="close-menu"></i>
+        </div>
+        <nav class="flex flex-col space-y-6">
+            <a href="#" class="text-xl py-2 border-b border-gray-700">Home</a>
+            <a href="#about" class="text-xl py-2 border-b border-gray-700">About</a>
+            <a href="#skills" class="text-xl py-2 border-b border-gray-700">Skills</a>
+            <a href="#work" class="text-xl py-2 border-b border-gray-700">Projects</a>
+            <a href="#consultation" class="text-xl py-2 border-b border-gray-700">Consultation</a>
+            <a href="#calculator" class="text-xl py-2 border-b border-gray-700">Calculator</a>
+            <a href="#contact" class="text-xl py-2 border-b border-gray-700">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-navy opacity-80 z-0"></div>
+        <div class="relative z-20 text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-down">
+                AS Jasrotia
+            </h1>
+            <div class="text-xl md:text-3xl mb-8" data-aos="fade-down" data-aos-delay="100">
+                <span class="text-teal">Navigating Officer</span> • 
+                <span class="text-teal">Web-App Builder</span> • 
+                <span class="text-teal">Video Editor</span>
+            </div>
+            <button onclick="document.getElementById('work').scrollIntoView({behavior: 'smooth'})" 
+                class="bg-teal text-navy font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105"
+                data-aos="fade-up" data-aos-delay="200">
+                Explore My Work
+            </button>
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about" class="py-20 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4" data-aos="fade-up">About Me</h2>
+            <div class="w-24 h-1 bg-teal mx-auto mb-8" data-aos="fade-up"></div>
+            <p class="text-xl max-w-2xl mx-auto" data-aos="fade-up">
+                Maritime professional with a passion for technology and creative media. 
+                Combining years of sea experience with modern digital skills to create 
+                solutions that bridge physical and digital worlds.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div class="text-center" data-aos="fade-up">
+                <div class="stat-number mb-2" id="seaMiles">0</div>
+                <p class="text-lg">Sea Miles Navigated</p>
+            </div>
+            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number mb-2" id="webApps">0</div>
+                <p class="text-lg">Web Apps Developed</p>
+            </div>
+            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number mb-2" id="videosEdited">0</div>
+                <p class="text-lg">Videos Edited</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Row -->
+    <section id="skills" class="py-20 bg-light-navy">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-up">Technical Skills</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-html5 text-3xl text-orange-500 mr-3"></i>
+                        <h3 class="text-xl font-bold">HTML5</h3>
+                    </div>
+                    <p>Built responsive, accessible websites with semantic markup</p>
+                </div>
+                
+                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-css3-alt text-3xl text-blue-500 mr-3"></i>
+                        <h3 class="text-xl font-bold">CSS3</h3>
+                    </div>
+                    <p>Created modern layouts with Flexbox, Grid, and animations</p>
+                </div>
+                
+                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <i class="fab fa-js text-3xl text-yellow-400 mr-3"></i>
+                        <h3 class="text-xl font-bold">JavaScript</h3>
+                    </div>
+                    <p>Developed interactive features with vanilla JS and APIs</p>
+                </div>
+                
+                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-table text-3xl text-green-500 mr-3"></i>
+                        <h3 class="text-xl font-bold">Google Sheets API</h3>
+                    </div>
+                    <p>Integrated with Google Sheets for dynamic data solutions</p>
+                </div>
+                
+                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-film text-3xl text-purple-500 mr-3"></i>
+                        <h3 class="text-xl font-bold">DaVinci Resolve</h3>
+                    </div>
+                    <p>Professional color grading and video editing for clients</p>
+                </div>
+                
+                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-ship text-3xl text-teal mr-3"></i>
+                        <h3 class="text-xl font-bold">Maritime Tech</h3>
+                    </div>
+                    <p>Developed specialized tools for the shipping industry</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Hub -->
+    <section id="work" class="py-20 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Project Hub</h2>
+        <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">
+            <button class="filter-btn px-4 py-2 rounded-full bg-teal text-navy font-medium" data-filter="all">All</button>
+            <button class="filter-btn px-4 py-2 rounded-full border border-teal hover:bg-teal hover:text-navy transition" data-filter="web">Web Apps</button>
+            <button class="filter-btn px-4 py-2 rounded-full border border-teal hover:bg-teal hover:text-navy transition" data-filter="video">Video Edits</button>
+            <button class="filter-btn px-4 py-2 rounded-full border border-teal hover:bg-teal hover:text-navy transition" data-filter="sea">Maritime Tools</button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+            <!-- Project 1 -->
+            <div class="project-card" data-type="sea">
+                <div class="h-48 bg-blue-900 rounded-t-lg flex items-center justify-center">
+                    <i class="fas fa-calculator text-6xl text-blue-400"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">NRE Period Calculator</h3>
+                    <p class="text-gray-300 mb-4">Calculate Notice of Readiness periods for maritime operations.</p>
+                    <div class="flex space-x-3">
+                        <a href="https://cybonator.github.io/justjasrotia/sea.html" target="_blank" class="px-4 py-2 bg-teal text-navy rounded-md font-medium">Demo</a>
+                        <button class="px-4 py-2 border border-teal text-teal rounded-md font-medium">GitHub</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card" data-type="video">
+                <div class="h-48 bg-purple-900 rounded-t-lg flex items-center justify-center">
+                    <i class="fas fa-film text-6xl text-purple-400"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Video Editing Project</h3>
+                    <p class="text-gray-300 mb-4">Professional video editing for YouTube channel content.</p>
+                    <div class="flex space-x-3">
+                        <a href="https://youtu.be/uNePKtKUJ3M" target="_blank" class="px-4 py-2 bg-teal text-navy rounded-md font-medium">Demo</a>
+                        <button class="px-4 py-2 border border-teal text-teal rounded-md font-medium">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card" data-type="web">
+                <div class="h-48 bg-green-900 rounded-t-lg flex items-center justify-center">
+                    <i class="fas fa-boxes text-6xl text-green-400"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Inventory Management</h3>
+                    <p class="text-gray-300 mb-4">Web application for managing enterprise inventory.</p>
+                    <div class="flex space-x-3">
+                        <a href="https://adityasinghjasrotia.github.io/jasrotiaenterprise.github.io/" target="_blank" class="px-4 py-2 bg-teal text-navy rounded-md font-medium">Demo</a>
+                        <button class="px-4 py-2 border border-teal text-teal rounded-md font-medium">GitHub</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section id="consultation" class="py-20 bg-light-navy">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Consultation for Shipping Industry Jobs</h2>
+            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 consultation-grid">
+                <div class="consultation-card p-8 rounded-lg" data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-4 text-teal">Career Guidance</h3>
+                    <p class="mb-4">With years of experience in the maritime industry, I offer personalized career consultations for:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Deck & Engineering Officers</li>
+                        <li>Maritime Graduates</li>
+                        <li>Industry Transition Advising</li>
+                        <li>Interview Preparation</li>
+                    </ul>
+                </div>
+                
+                <div class="consultation-card p-8 rounded-lg" data-aos="fade-left">
+                    <h3 class="text-xl font-bold mb-4 text-teal">Industry Insights</h3>
+                    <p class="mb-4">Stay ahead with insights on:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Emerging Maritime Technologies</li>
+                        <li>Global Shipping Trends</li>
+                        <li>Career Growth Opportunities</li>
+                        <li>Certification Pathways</li>
+                    </ul>
+                    <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" 
+                        class="mt-6 bg-teal text-navy font-bold py-2 px-6 rounded-md">
+                        Schedule a Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Macro Calculator -->
+    <section id="calculator" class="py-20">
+        <div class="max-w-2xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Nutrition Calculator</h2>
+            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
+            
+            <div class="calculator-container p-6 md:p-8" data-aos="fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label class="block mb-2">Weight (kg)</label>
+                        <input type="number" id="weight" class="w-full px-4 py-3 rounded-md form-input" placeholder="70" min="40" max="200">
+                    </div>
+                    <div>
+                        <label class="block mb-2">Goal</label>
+                        <select id="goal" class="w-full px-4 py-3 rounded-md form-input">
+                            <option value="maintain">Maintain Weight</option>
+                            <option value="cut">Lose Fat</option>
+                            <option value="bulk">Gain Muscle</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="calculate-btn" class="w-full bg-teal text-navy font-bold py-3 rounded-md mb-8 hover:opacity-90">
+                    Calculate Macros
+                </button>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="py-3">Macro</th>
+                                <th class="py-3">Grams</th>
+                                <th class="py-3">Calories</th>
+                                <th class="py-3">% Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-table">
+                            <tr class="border-b border-gray-700">
+                                <td class="py-3">Protein</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3">-</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="py-3">Carbs</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3">-</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Fat</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3">-</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="font-bold">
+                                <td class="py-3">Total</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3" id="total-calories">-</td>
+                                <td class="py-3">100%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-light-navy">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="instagram-container" data-aos="fade-up">
+                <div class="instagram-icon">
+                    <i class="fab fa-instagram text-3xl text-white"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 bg-teal mx-auto mb-8"></div>
+                <p class="text-xl mb-8">DM me on Instagram for collaborations, inquiries, or consultations!</p>
+                <p class="text-gray-300 mb-8">I'm most responsive through Instagram DMs. Send me a message and I'll get back to you as soon as possible.</p>
+                
+                <a href="https://instagram.com/justjasrotia" target="_blank" class="instagram-cta font-bold py-3 px-8 rounded-full inline-block">
+                    <i class="fab fa-instagram mr-2"></i> Message on Instagram
+                </a>
+                
+                <div class="mt-8 text-gray-400">
+                    <p>Alternatively, you can email me:</p>
+                    <p class="text-teal font-medium mt-2">contact@asjasrotia.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 text-center">
+        <div class="flex justify-center mb-6">
+            <div class="w-16 h-16 rounded-full bg-teal flex items-center justify-center text-navy mb-6">
+                <i class="fas fa-anchor text-2xl"></i>
+            </div>
+        </div>
+        
+        <div class="flex justify-center space-x-6 mb-8">
+            <a href="https://github.com/adityasinghjasrotia" target="_blank" class="text-2xl hover:text-teal transition social-link">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/aditya-jasrotia" target="_blank" class="text-2xl hover:text-teal transition social-link">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com/justjasrotia" target="_blank" class="text-2xl hover:text-teal transition social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+        
+        <p class="text-gray-400">
+            © 2025 AS Jasrotia – Built at sea
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Mobile menu functionality
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('open');
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+        });
+        
+        mobileOverlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+        });
+        
+        // Animated stats
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = value.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Initialize stats when in view
+        const statsSection = document.querySelector('.py-20.px-4');
+        let statsAnimated = false;
+        
+        function initStats() {
+            if (!statsAnimated) {
+                animateValue('seaMiles', 0, 125000, 2000);
+                animateValue('webApps', 0, 27, 1500);
+                animateValue('videosEdited', 0, 142, 1800);
+                statsAnimated = true;
+            }
+        }
+        
+        // Macro calculator
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const weight = parseFloat(document.getElementById('weight').value) || 70;
+            const goal = document.getElementById('goal').value;
+            
+            let protein, carbs, fat, calories;
+            
+            // Base calculations
+            protein = weight * 2.2; // 2.2g per kg of body weight
+            
+            if (goal === 'maintain') {
+                calories = weight * 33;
+            } else if (goal === 'cut') {
+                calories = weight * 28;
+            } else { // bulk
+                calories = weight * 38;
+            }
+            
+            // Adjust protein based on goal
+            if (goal === 'cut') protein = weight * 2.5;
+            if (goal === 'bulk') protein = weight * 2.0;
+            
+            // Fat: 25% of calories
+            fat = (calories * 0.25) / 9;
+            
+            // Remaining calories to carbs
+            const remainingCalories = calories - (protein * 4) - (fat * 9);
+            carbs = remainingCalories / 4;
+            
+            // Update table
+            document.getElementById('results-table').innerHTML = `
+                <tr class="border-b border-gray-700">
+                    <td class="py-3">Protein</td>
+                    <td class="py-3">${protein.toFixed(1)}g</td>
+                    <td class="py-3">${(protein * 4).toFixed(0)}</td>
+                    <td class="py-3">${((protein * 4 / calories) * 100).toFixed(0)}%</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                    <td class="py-3">Carbs</td>
+                    <td class="py-3">${carbs.toFixed(1)}g</td>
+                    <td class="py-3">${(carbs * 4).toFixed(0)}</td>
+                    <td class="py-3">${((carbs * 4 / calories) * 100).toFixed(0)}%</td>
+                </tr>
+                <tr>
+                    <td class="py-3">Fat</td>
+                    <td class="py-3">${fat.toFixed(1)}g</td>
+                    <td class="py-3">${(fat * 9).toFixed(0)}</td>
+                    <td class="py-3">${((fat * 9 / calories) * 100).toFixed(0)}%</td>
+                </tr>
+            `;
+            
+            document.getElementById('total-calories').textContent = Math.round(calories);
+        });
+        
+        // Project filtering
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('bg-teal', 'text-navy');
+                    btn.classList.add('border', 'border-teal');
+                });
+                this.classList.add('bg-teal', 'text-navy');
+                this.classList.remove('border');
+                
+                // Filter projects
+                const projects = document.querySelectorAll('.project-card');
+                
+                projects.forEach(project => {
+                    const type = project.getAttribute('data-type');
+                    
+                    if (filter === 'all' || type === filter) {
+                        project.style.display = 'block';
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Initialize stats when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initStats();
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(statsSection);
+    </script>
+</body>
+</html>
