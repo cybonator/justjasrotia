@@ -16,14 +16,17 @@
             --teal: #16DB93;
             --light-navy: #1B263B;
             --gray: #E0E1DD;
+            --dark-gray: #121212;
+            --mid-gray: #1E1E1E;
         }
         
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: var(--navy);
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--navy) 50%, var(--mid-gray) 100%);
             color: white;
             scroll-behavior: smooth;
             overflow-x: hidden;
+            background-attachment: fixed;
         }
         
         h1, h2, h3, h4 {
@@ -235,9 +238,389 @@
             justify-content: center;
             margin: 0 auto 20px;
         }
+        
+        /* New styles for clients section */
+        .clients-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .client-bubble {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #1e2a38, #16202d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(22, 219, 147, 0.2);
+        }
+        
+        .client-bubble:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(22, 219, 147, 0.2);
+            border-color: var(--teal);
+        }
+        
+        .client-bubble img {
+            max-width: 70%;
+            max-height: 70%;
+            filter: grayscale(100%) brightness(150%);
+            transition: filter 0.3s ease;
+        }
+        
+        .client-bubble:hover img {
+            filter: grayscale(0%) brightness(100%);
+        }
+        
+        .client-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(22, 219, 147, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .client-bubble:hover::before {
+            opacity: 1;
+        }
+        
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* New styles for offer section */
+        .offer-section {
+            background: linear-gradient(to right, #0a1929, #121f2f);
+            border-top: 1px solid rgba(22, 219, 147, 0.1);
+            border-bottom: 1px solid rgba(22, 219, 147, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(22, 219, 147, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(22, 219, 147, 0.05) 0%, transparent 20%);
+            pointer-events: none;
+        }
+        
+        .offer-card {
+            background: linear-gradient(145deg, #1b263b, #16202d);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: rgba(22, 219, 147, 0.3);
+        }
+        
+        .offer-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(22, 219, 147, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--teal);
+        }
+        
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .how-it-works {
+            background: rgba(22, 219, 147, 0.05);
+            border-left: 4px solid var(--teal);
+            padding: 20px 30px;
+            border-radius: 0 10px 10px 0;
+            margin: 40px 0;
+        }
+        
+        .why-me {
+            background: linear-gradient(to right, rgba(22, 219, 147, 0.05), transparent);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(22, 219, 147, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--teal);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(22, 219, 147, 0.3), transparent);
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+        
+        /* New theme elements */
+        .theme-element {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .theme-element-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 120px;
+            transform: rotate(-15deg);
+        }
+        
+        .theme-element-2 {
+            top: 40%;
+            right: 5%;
+            font-size: 150px;
+            transform: rotate(25deg);
+        }
+        
+        .theme-element-3 {
+            bottom: 15%;
+            left: 10%;
+            font-size: 100px;
+            transform: rotate(10deg);
+        }
+        
+        .code-bg {
+            background-image: 
+                linear-gradient(rgba(22, 219, 147, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(22, 219, 147, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* New animation container */
+        .coding-animation-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            margin: 50px auto 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(145deg, #0a1929, #0d1b2a);
+        }
+        
+        .sea-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #1a3a5f, #0d1b2a);
+            overflow: hidden;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23016b9d" opacity="0.4"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23016b9d" opacity="0.4"/></svg>');
+            background-size: 1200px 100px;
+            animation: wave 15s linear infinite;
+        }
+        
+        .wave:nth-child(2) {
+            bottom: -10px;
+            opacity: 0.5;
+            animation: wave 18s linear infinite reverse;
+        }
+        
+        .wave:nth-child(3) {
+            bottom: -20px;
+            opacity: 0.2;
+            animation: wave 20s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .coding-station {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        .coding-desk {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, #5d4037, #3e2723);
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .monitor {
+            width: 80%;
+            height: 180px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+        
+        .monitor-screen {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            background: #0a0a23;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #16DB93;
+            overflow: hidden;
+        }
+        
+        .terminal-code {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 15px;
+            white-space: pre;
+        }
+        
+        .camera {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+        
+        .camera-lens {
+            width: 20px;
+            height: 20px;
+            background: #1a3a5f;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .camera-lens::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #16DB93;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #16DB93;
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .date-display {
+            position: absolute;
+            top: -50px;
+            right: 300px;
+            background: rgba(22, 219, 147, 0.1);
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(22, 219, 147, 0.2);
+        }
     </style>
 </head>
 <body>
+    <!-- Theme elements -->
+    <div class="theme-element theme-element-1">
+        <i class="fas fa-anchor"></i>
+    </div>
+    <div class="theme-element theme-element-2">
+        <i class="fas fa-code"></i>
+    </div>
+    <div class="theme-element theme-element-3">
+        <i class="fas fa-globe-asia"></i>
+    </div>
+
     <!-- Mobile Menu -->
     <div class="mobile-menu-btn fixed top-4 right-4 z-50 text-2xl text-teal md:hidden">
         <i class="fas fa-bars" id="menu-toggle"></i>
@@ -254,6 +637,8 @@
             <a href="#about" class="text-xl py-2 border-b border-gray-700">About</a>
             <a href="#skills" class="text-xl py-2 border-b border-gray-700">Skills</a>
             <a href="#work" class="text-xl py-2 border-b border-gray-700">Projects</a>
+            <a href="#clients" class="text-xl py-2 border-b border-gray-700">Clients</a>
+            <a href="#offer" class="text-xl py-2 border-b border-gray-700">Offer</a>
             <a href="#consultation" class="text-xl py-2 border-b border-gray-700">Consultation</a>
             <a href="#calculator" class="text-xl py-2 border-b border-gray-700">Calculator</a>
             <a href="#contact" class="text-xl py-2 border-b border-gray-700">Contact</a>
@@ -273,10 +658,35 @@
                 <span class="text-teal">Video Editor</span>
             </div>
             <button onclick="document.getElementById('work').scrollIntoView({behavior: 'smooth'})" 
-                class="bg-teal text-navy font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105"
+                class="bg-teal text-navy font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 mb-12"
                 data-aos="fade-up" data-aos-delay="200">
                 Explore My Work
             </button>
+            
+            <!-- Date Display -->
+            <div class="date-display" id="current-date"></div>
+            
+            <!-- Animation Container -->
+            <div class="coding-animation-container" data-aos="fade-up" data-aos-delay="300">
+                <div class="sea-background">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+                
+                <div class="coding-station">
+                    <div class="monitor">
+                        <div class="monitor-screen">
+                            <div class="terminal-code" id="terminal-code"></div>
+                        </div>
+                    </div>
+                    <div class="coding-desk"></div>
+                </div>
+                
+                <div class="camera">
+                    <div class="camera-lens"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -309,7 +719,7 @@
     </section>
 
     <!-- Skills Row -->
-    <section id="skills" class="py-20 bg-light-navy">
+    <section id="skills" class="py-20 bg-light-navy code-bg">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-up">Technical Skills</h2>
             
@@ -425,6 +835,170 @@
         </div>
     </section>
 
+    <!-- Clients Section -->
+    <section id="clients" class="py-20 clients-section">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-up">Trusted By Industry Leaders</h2>
+            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
+            
+            <div class="client-grid" data-aos="fade-up">
+                <div class="text-center">
+                    <div class="client-bubble" onclick="window.open('https://www.maersk.com', '_blank')">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDc2Q0QiLz4KICA8cGF0aCBkPSJNNTcuMjQzOSAzOC4xODM4TDUzLjI0MzkgMzAuMTgzOEg0NC43NTYxTDMwLjc1NjEgNTguMTgzOEgzOC4yNDM5TDQyLjI0MzkgNTAuMTgzOEg1NC43NTYxTDU4Ljc1NjEgNTguMTgzOEg2Ni4yNDM5TDUyLjI0MzkgMzAuMTgzOEg0NS43NTYxTDU3LjI0MzkgNTAuMTgzOEg1Ny4yNDM5VjM4LjE4MzhINjYuMjQzOVYzMC4xODM4SDUzLjI0MzlMNTcuMjQzOSAzOC4xODM4WiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNNzUuMjQzOSAzOC4xODM4TDc5LjI0MzkgMzAuMTgzOEg4Ny43MzYxTDEwMS43MzYgNTguMTgzOEg5NC4yNDM5TDkwLjI0MzkgNTAuMTgzOEg3Ny43MzYxTDczLjczNjEgNTguMTgzOEg2Ni4yNDM5TDgwLjI0MzkgMzAuMTgzOEg4Ni43MzYxTDc1LjI0MzkgNTAuMTgzOEg3NS4yNDM5VjM4LjE4MzhINjYuMjQzOVYzMC4xODM4SDc5LjI0MzlMNzUuMjQzOSAzOC4xODM4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Maersk Line">
+                    </div>
+                    <p class="mt-4 font-medium">Maersk Line</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="client-bubble" onclick="window.open('https://www.msc.com', '_blank')">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDhDQzAiLz4KICA8cGF0aCBkPSJNNDQgNjRDNCA2NCA0IDk0IDQgOTRIMTI0QzEyNCA5NCAxMjQgNjQgMTI0IDY0QzEwNCA2NCA4NCA2NCA2NCA2NEM0NCA2NCA0NCA2NCA0NCA2NFoiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTg0IDY0QzY0IDY0IDQ0IDY0IDI0IDY0QzQgNjQgNCAzNCA0IDM0SDg0Qzg0IDM0IDg0IDY0IDg0IDY0WiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNODQgNjRDODQgNjQgODQgMzQgODQgMzRIMTI0QzEyNCAzNCAxMjQgNjQgMTI0IDY0QzEwNCA2NCA4NCA2NCA2NCA2NEM4NCA2NCA4NCA2NCA4NCA2NFoiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTQ0IDY0QzQ0IDY0IDQ0IDk0IDQ0IDk0SDg0Qzg0IDk0IDg0IDY0IDg0IDY0QzY0IDY0IDQ0IDY0IDQ0IDY0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="MSC">
+                    </div>
+                    <p class="mt-4 font-medium">MSC</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="client-bubble" onclick="window.open('https://www.coscoshipping.com', '_blank')">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiNDMDAwMTkiLz4KICA8cGF0aCBkPSJNNjQgMzZDNjQgMzYgOTIgMzYgOTIgMzZDMTAwIDM2IDEwOCA0NCAxMDggNTJDMTE2IDYwIDEwOCA2OCAxMDggNjhMODAgOTZDODAgOTYgNzIgMTA0IDY0IDEwNEM1NiAxMDQgNDggOTYgNDggOTZMMjAgNjhDMjAgNjggMTIgNjAgMjAgNTJDMjggNDQgMzYgMzYgNDQgMzZDNTIgMzYgNjQgMzYgNjQgMzZaIiBmaWxsPSJ3aGl0ZSIvPgogIDxwYXRoIGQ9Ik03MiA0OEM3MiA0OCA4OCA0OCA4OCA0OEM5NiA0OCA5NiA1NiA5NiA1NkM5NiA2NCA4OCA2NCA4OCA2NEw3MiA4MEM3MiA4MCA2NCA4OCA2NCA4OEM2NCA4OCA1NiA4MCA1NiA4MEw0MCA2NEM0MCA2NCAzMiA2NCAzMiA1NkMzMiA0OCA0MCA0OCA0MCA0OEM1NiA0OCA3MiA0OCA3MiA0OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="COSCO Shipping">
+                    </div>
+                    <p class="mt-4 font-medium">COSCO Shipping</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="client-bubble" onclick="window.open('https://www.evergreen-marine.com', '_blank')">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDc4MDAiLz4KICA8cGF0aCBkPSJNNjQgMzJDNjQgMzIgOTYgMzIgOTYgMzJDMTEyIDMyIDEyMCA0MCAxMjAgNTZDMTIwIDcyIDExMiA4MCA5NiA4MEg2NEM0OCA4MCAzMiA2NCAzMiA0OEMzMiAzMiA0OCAzMiA0OCAzMkM1NiAzMiA2NCAzMiA2NCAzMloiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTY0IDk2QzY0IDk2IDMyIDk2IDMyIDk2QzE2IDk2IDggODggOCA3MkM4IDU2IDE2IDQ4IDMyIDQ4SDY0QzgwIDQ4IDk2IDY0IDk2IDgwQzk2IDk2IDgwIDk2IDgwIDk2QzcyIDk2IDY0IDk2IDY0IDk2WiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNMzIgNjRDMzIgNjQgMCA2NCAwIDY0QzAgODAgOCA4OCAyNCA4OEM0MCA4OCA0OCA4MCA0OCA2NEM0OCA0OCA0MCA0MCAyNCA0MEM4IDQwIDAgNDggMCA2NEMwIDgwIDggODggMjQgODhDMzIgODggMzIgODAgMzIgODBDMzIgODAgMjQgODAgMjQgNjRDMjQgNDggMzIgNDggMzIgNDhDMzIgNDggNDAgNDggNDAgNjRDNDAgODAgMzIgODAgMzIgODBDMzIgODAgNDAgODAgNDAgODBDNDAgOTYgMzIgMTA0IDI0IDEwNEM4IDEwNCAwIDk2IDAgODBDMCA2NCA4IDU2IDI0IDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAyNCAxMDRDMTYgMTA0IDggOTYgOCA4MEM4IDY0IDE2IDU2IDMyIDU2QzQ4IDU2IDU2IDY0IDU2IDgwQzU2IDk2IDQ4IDEwNCAzMiAxMDRDMTYgMTA0IDggOTYgOCA4MEM4IDY0IDE2IDU2IDMyIDU2QzQ4IDU2IDU2IDY0IDU2IDgwQzU2IDk2IDQ4IDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMyAxMDRDMjUgMTA0IDE3IDk2IDE3IDgwQzE3IDY0IDI1IDU2IDMzIDU2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Evergreen Marine">
+                    </div>
+                    <p class="mt-4 font-medium">Evergreen Marine</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="client-bubble" onclick="window.open('https://www.hapag-lloyd.com', '_blank')">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDY5QTgiLz4KICA8cGF0aCBkPSJNMzIgMzJIMTBWMTAwSDMyVjMyWiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNMzIgMzJINTBWMTAwSDMyVjMyWiIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC43Ii8+CiAgPHBhdGggZD0iTTUwIDMySDY4VjEwMEg1MFYzMloiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuNSIvPgogIDxwYXRoIGQ9Ik02OCAzMkg4NlYxMDBINjhWMzJaIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KICA8cGF0aCBkPSJNODYgMzJIMTA0VjEwMEg4NlYzMloiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgogIDxwYXRoIGQ9Ik0xMTggMzJIMTA0VjEwMEgxMThWMzJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=" alt="Hapag-Lloyd">
+                    </div>
+                    <p class="mt-4 font-medium">Hapag-Lloyd</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer Section -->
+    <section id="offer" class="py-20 offer-section">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Ready to Skyrocket Your Growth?</h2>
+            <h3 class="text-xl md:text-2xl text-center text-teal mb-16" data-aos="fade-up">Here's My No-Brainer Offer</h3>
+            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
+            
+            <div class="offer-grid" data-aos="fade-up">
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Zero Upfront Cost</h4>
+                    <ul class="space-y-2">
+                        <li>I start building your landing page or e-commerce app today</li>
+                        <li>You pay only when you love the result</li>
+                    </ul>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Blazing-Fast Delivery</h4>
+                    <ul class="space-y-2">
+                        <li>Single-page landing page live in 48 hours</li>
+                        <li>E-commerce prototype in 5 days</li>
+                    </ul>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Built for Creators</h4>
+                    <ul class="space-y-2">
+                        <li>WhatsApp & email lead capture</li>
+                        <li>Video embeds, social feeds, checkout flows</li>
+                    </ul>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Pocket-Friendly Pricing</h4>
+                    <ul class="space-y-2">
+                        <li>Starter landing pages from ₹4,999</li>
+                        <li>Full e-commerce apps from ₹14,999</li>
+                        <li>Flat rates. No surprises</li>
+                    </ul>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Risk-Free Guarantee</h4>
+                    <ul class="space-y-2">
+                        <li>30-day free tweaks & support</li>
+                        <li>100% money-back if you're not thrilled</li>
+                    </ul>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Bonus Toolkit</h4>
+                    <ul class="space-y-2">
+                        <li>Free 5-min "Boost Your Conversion" video</li>
+                        <li>Quick-start guide to WhatsApp automation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="how-it-works" data-aos="fade-up">
+                <h4 class="text-2xl font-bold mb-6 text-teal">How It Works</h4>
+                <ol class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="feature-icon"><i class="fas fa-calendar-check"></i></span>
+                        <div>
+                            <strong class="block">Book a Slot:</strong> Hit the "Get Started" button below
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="feature-icon"><i class="fas fa-comments"></i></span>
+                        <div>
+                            <strong class="block">Share Your Vision:</strong> Quick form or WhatsApp chat
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="feature-icon"><i class="fas fa-couch"></i></span>
+                        <div>
+                            <strong class="block">Sit Back & Relax:</strong> I handle design, development, and testing
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="feature-icon"><i class="fas fa-heart"></i></span>
+                        <div>
+                            <strong class="block">Love It or Leave It:</strong> Only pay if you're 100% happy
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="why-me" data-aos="fade-up">
+                <h4 class="text-2xl font-bold mb-4 text-teal">Why Choose Me?</h4>
+                <p class="mb-6 max-w-3xl mx-auto">
+                    As a tech-savvy creator with a unique blend of maritime discipline, coding expertise, and creative vision, I focus on delivering results—not just pretty websites. My solutions are built to perform and convert.
+                </p>
+                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" 
+                    class="bg-teal text-navy font-bold py-3 px-8 rounded-full hover:opacity-90 transition transform hover:scale-105">
+                    Get Started Today
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Consultation Section -->
     <section id="consultation" class="py-20 bg-light-navy">
         <div class="max-w-6xl mx-auto px-4">
@@ -471,11 +1045,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div>
                         <label class="block mb-2">Weight (kg)</label>
-                        <input type="number" id="weight" class="w-full px-4 py-3 rounded-md form-input" placeholder="70" min="40" max="200">
+                        <input type="number" id="weight" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 focus:border-teal focus:outline-none" placeholder="70" min="40" max="200">
                     </div>
                     <div>
                         <label class="block mb-2">Goal</label>
-                        <select id="goal" class="w-full px-4 py-3 rounded-md form-input">
+                        <select id="goal" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 focus:border-teal focus:outline-none">
                             <option value="maintain">Maintain Weight</option>
                             <option value="cut">Lose Fat</option>
                             <option value="bulk">Gain Muscle</option>
@@ -580,6 +1154,9 @@
         </p>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -610,114 +1187,158 @@
             mobileOverlay.classList.remove('open');
         });
         
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
         // Animated stats
         function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                obj.innerHTML = value.toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
+            try {
+                const obj = document.getElementById(id);
+                if (!obj) {
+                    console.error(`Element with ID ${id} not found`);
+                    return;
                 }
-            };
-            window.requestAnimationFrame(step);
+                
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    obj.innerHTML = value.toLocaleString();
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            } catch (error) {
+                console.error('Error animating stats:', error);
+            }
         }
         
         // Initialize stats when in view
-        const statsSection = document.querySelector('.py-20.px-4');
+        const statsSection = document.querySelector('#about');
         let statsAnimated = false;
         
         function initStats() {
             if (!statsAnimated) {
-                animateValue('seaMiles', 0, 125000, 2000);
-                animateValue('webApps', 0, 27, 1500);
-                animateValue('videosEdited', 0, 142, 1800);
-                statsAnimated = true;
+                try {
+                    animateValue('seaMiles', 0, 125000, 2000);
+                    animateValue('webApps', 0, 27, 1500);
+                    animateValue('videosEdited', 0, 142, 1800);
+                    statsAnimated = true;
+                } catch (error) {
+                    console.error('Error initializing stats:', error);
+                }
             }
         }
         
-        // Macro calculator
+        // Macro calculator with error handling
         document.getElementById('calculate-btn').addEventListener('click', function() {
-            const weight = parseFloat(document.getElementById('weight').value) || 70;
-            const goal = document.getElementById('goal').value;
-            
-            let protein, carbs, fat, calories;
-            
-            // Base calculations
-            protein = weight * 2.2; // 2.2g per kg of body weight
-            
-            if (goal === 'maintain') {
-                calories = weight * 33;
-            } else if (goal === 'cut') {
-                calories = weight * 28;
-            } else { // bulk
-                calories = weight * 38;
+            try {
+                const weightInput = document.getElementById('weight');
+                const weight = parseFloat(weightInput.value);
+                
+                // Validate input
+                if (isNaN(weight) || weight < 40 || weight > 200) {
+                    showToast('Please enter a valid weight between 40-200 kg');
+                    weightInput.focus();
+                    return;
+                }
+                
+                const goal = document.getElementById('goal').value;
+                
+                let protein, carbs, fat, calories;
+                
+                // Base calculations
+                protein = weight * 2.2; // 2.2g per kg of body weight
+                
+                if (goal === 'maintain') {
+                    calories = weight * 33;
+                } else if (goal === 'cut') {
+                    calories = weight * 28;
+                } else { // bulk
+                    calories = weight * 38;
+                }
+                
+                // Adjust protein based on goal
+                if (goal === 'cut') protein = weight * 2.5;
+                if (goal === 'bulk') protein = weight * 2.0;
+                
+                // Fat: 25% of calories
+                fat = (calories * 0.25) / 9;
+                
+                // Remaining calories to carbs
+                const remainingCalories = calories - (protein * 4) - (fat * 9);
+                carbs = remainingCalories / 4;
+                
+                // Update table
+                document.getElementById('results-table').innerHTML = `
+                    <tr class="border-b border-gray-700">
+                        <td class="py-3">Protein</td>
+                        <td class="py-3">${protein.toFixed(1)}g</td>
+                        <td class="py-3">${(protein * 4).toFixed(0)}</td>
+                        <td class="py-3">${((protein * 4 / calories) * 100).toFixed(0)}%</td>
+                    </tr>
+                    <tr class="border-b border-gray-700">
+                        <td class="py-3">Carbs</td>
+                        <td class="py-3">${carbs.toFixed(1)}g</td>
+                        <td class="py-3">${(carbs * 4).toFixed(0)}</td>
+                        <td class="py-3">${((carbs * 4 / calories) * 100).toFixed(0)}%</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3">Fat</td>
+                        <td class="py-3">${fat.toFixed(1)}g</td>
+                        <td class="py-3">${(fat * 9).toFixed(0)}</td>
+                        <td class="py-3">${((fat * 9 / calories) * 100).toFixed(0)}%</td>
+                    </tr>
+                `;
+                
+                document.getElementById('total-calories').textContent = Math.round(calories);
+                
+                showToast('Macros calculated successfully!');
+            } catch (error) {
+                console.error('Error in macro calculator:', error);
+                showToast('An error occurred. Please try again.');
             }
-            
-            // Adjust protein based on goal
-            if (goal === 'cut') protein = weight * 2.5;
-            if (goal === 'bulk') protein = weight * 2.0;
-            
-            // Fat: 25% of calories
-            fat = (calories * 0.25) / 9;
-            
-            // Remaining calories to carbs
-            const remainingCalories = calories - (protein * 4) - (fat * 9);
-            carbs = remainingCalories / 4;
-            
-            // Update table
-            document.getElementById('results-table').innerHTML = `
-                <tr class="border-b border-gray-700">
-                    <td class="py-3">Protein</td>
-                    <td class="py-3">${protein.toFixed(1)}g</td>
-                    <td class="py-3">${(protein * 4).toFixed(0)}</td>
-                    <td class="py-3">${((protein * 4 / calories) * 100).toFixed(0)}%</td>
-                </tr>
-                <tr class="border-b border-gray-700">
-                    <td class="py-3">Carbs</td>
-                    <td class="py-3">${carbs.toFixed(1)}g</td>
-                    <td class="py-3">${(carbs * 4).toFixed(0)}</td>
-                    <td class="py-3">${((carbs * 4 / calories) * 100).toFixed(0)}%</td>
-                </tr>
-                <tr>
-                    <td class="py-3">Fat</td>
-                    <td class="py-3">${fat.toFixed(1)}g</td>
-                    <td class="py-3">${(fat * 9).toFixed(0)}</td>
-                    <td class="py-3">${((fat * 9 / calories) * 100).toFixed(0)}%</td>
-                </tr>
-            `;
-            
-            document.getElementById('total-calories').textContent = Math.round(calories);
         });
         
         // Project filtering
         document.querySelectorAll('.filter-btn').forEach(button => {
             button.addEventListener('click', function() {
-                const filter = this.getAttribute('data-filter');
-                
-                // Update active button
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('bg-teal', 'text-navy');
-                    btn.classList.add('border', 'border-teal');
-                });
-                this.classList.add('bg-teal', 'text-navy');
-                this.classList.remove('border');
-                
-                // Filter projects
-                const projects = document.querySelectorAll('.project-card');
-                
-                projects.forEach(project => {
-                    const type = project.getAttribute('data-type');
+                try {
+                    const filter = this.getAttribute('data-filter');
                     
-                    if (filter === 'all' || type === filter) {
-                        project.style.display = 'block';
-                    } else {
-                        project.style.display = 'none';
-                    }
-                });
+                    // Update active button
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('bg-teal', 'text-navy');
+                        btn.classList.add('border', 'border-teal');
+                    });
+                    this.classList.add('bg-teal', 'text-navy');
+                    this.classList.remove('border');
+                    
+                    // Filter projects
+                    const projects = document.querySelectorAll('.project-card');
+                    
+                    projects.forEach(project => {
+                        const type = project.getAttribute('data-type');
+                        
+                        if (filter === 'all' || type === filter) {
+                            project.style.display = 'block';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error filtering projects:', error);
+                }
             });
         });
         
@@ -730,7 +1351,102 @@
             });
         }, { threshold: 0.3 });
         
-        observer.observe(statsSection);
+        if (statsSection) {
+            observer.observe(statsSection);
+        } else {
+            console.error('Stats section not found');
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                    mobileOverlay.classList.remove('open');
+                }
+            });
+        });
+        
+        // Handle form input validation
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.checkValidity()) {
+                    this.classList.remove('border-red-500');
+                } else {
+                    this.classList.add('border-red-500');
+                }
+            });
+        });
+        
+        // Terminal typing animation
+        const terminalCode = document.getElementById('terminal-code');
+        const codeLines = [
+            "> npm init maritime-app",
+            "Creating new maritime application...",
+            "> Installing navigation tools...",
+            "> Installing web development modules...",
+            "> Installing video editing suite...",
+            "> Building portfolio...",
+            "> Launching website...",
+            "> Welcome aboard Captain Jasrotia!",
+            "> System ready for deployment"
+        ];
+        
+        let lineIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeTerminal() {
+            const currentLine = codeLines[lineIndex];
+            
+            if (!isDeleting && charIndex <= currentLine.length) {
+                terminalCode.textContent = codeLines.slice(0, lineIndex).join('\n') + '\n' + currentLine.substring(0, charIndex) + '<span class="typing-cursor"></span>';
+                charIndex++;
+                setTimeout(typeTerminal, charIndex === currentLine.length + 1 ? 1000 : 50);
+            } else if (isDeleting && charIndex >= 0) {
+                terminalCode.textContent = codeLines.slice(0, lineIndex).join('\n') + '\n' + currentLine.substring(0, charIndex) + '<span class="typing-cursor"></span>';
+                charIndex--;
+                setTimeout(typeTerminal, 30);
+            } else {
+                isDeleting = !isDeleting;
+                lineIndex = !isDeleting ? (lineIndex + 1) % codeLines.length : lineIndex;
+                setTimeout(typeTerminal, 500);
+            }
+        }
+        
+        // Set current date
+        function updateDate() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        }
+        
+        // Start animations
+        setTimeout(() => {
+            typeTerminal();
+            updateDate();
+            setInterval(updateDate, 60000); // Update time every minute
+        }, 1000);
     </script>
 </body>
 </html>
