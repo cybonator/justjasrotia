@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Design Request | Premium Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --clr-primary: #0f5132;
+            --clr-secondary: #198754;
+            --clr-highlight: #48c78e;
+            --clr-accent: #d1e7dd;
+            --clr-light: #f8f9fa;
+            --clr-dark: #212529;
+            --clr-gray: #6c757d;
+            --clr-border: #dee2e6;
+            --radius: 6px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --gap: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            background: linear-gradient(135deg, var(--clr-accent) 0%, #e9f5ef 100%);
+            color: var(--clr-dark);
+            padding: var(--gap);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: calc(var(--gap) * 2);
+        }
+
+        .header h1 {
+            color: var(--clr-primary);
+            font-size: 2.2rem;
+            margin-bottom: calc(var(--gap) / 2);
+            font-weight: 700;
+        }
+
+        .header p {
+            color: var(--clr-gray);
+            font-size: 1.1rem;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: calc(var(--gap) * 2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--clr-primary), var(--clr-highlight));
+        }
+
+        .form-group {
+            margin-bottom: calc(var(--gap) * 1.5);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--clr-primary);
+            font-size: 1.05rem;
+        }
+
+        .form-group .hint {
+            font-size: 0.85rem;
+            color: var(--clr-gray);
+            margin-top: 4px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--clr-highlight);
+            box-shadow: 0 0 0 3px rgba(72, 199, 142, 0.2);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-option input, .checkbox-option input {
+            width: auto;
+        }
+
+        .color-pickers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-picker input {
+            width: 50px;
+            height: 40px;
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .color-suggestions {
+            background-color: var(--clr-accent);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .color-suggestions h4 {
+            margin-bottom: 8px;
+            color: var(--clr-primary);
+        }
+
+        .color-palettes {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .palette {
+            display: flex;
+            height: 24px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .palette-color {
+            width: 24px;
+        }
+
+        .repeatable-group {
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .repeatable-group .remove-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--clr-gray);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .repeatable-group .remove-btn:hover {
+            color: #dc3545;
+        }
+
+        .add-another {
+            background: none;
+            border: none;
+            color: var(--clr-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .add-another:hover {
+            color: var(--clr-primary);
+        }
+
+        .add-another i {
+            font-size: 0.9rem;
+        }
+
+        #submitBtn {
+            background-color: var(--clr-secondary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            padding: 14px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        #submitBtn:hover {
+            background-color: var(--clr-primary);
+            transform: translateY(-2px);
+        }
+
+        #submitBtn:disabled {
+            background-color: var(--clr-gray);
+            cursor: not-allowed;
+            transform: none;
+            opacity: 0.7;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 576px) {
+            .form-card {
+                padding: calc(var(--gap) * 1.5);
+            }
+            
+            .color-pickers {
+                grid-template-columns: 1fr;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--clr-gray);
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--clr-secondary);
+            text-decoration: none;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Website Design Request</h1>
+            <p>Fill out this form to get started with your premium website design. We'll contact you shortly after submission.</p>
+        </div>
+        
+        <div class="form-card">
+            <form id="designForm">
+                <!-- Brand Info -->
+                <div class="form-group">
+                    <label for="brand">Brand Name <span class="required">*</span></label>
+                    <input type="text" id="brand" name="brand" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Do you have a logo?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="hasLogoYes" name="hasLogo" value="yes">
+                            <label for="hasLogoYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hasLogoNo" name="hasLogo" value="no" checked>
+                            <label for="hasLogoNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Design Type -->
+                <div class="form-group">
+                    <label>Design Type <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="designMinimalist" name="design" value="Minimalist" required>
+                            <label for="designMinimalist">Minimalist</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="designRegular" name="design" value="Regular" checked>
+                            <label for="designRegular">Regular</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- YouTube Embed -->
+                <div class="form-group">
+                    <label for="ytLink">YouTube Video Embed URL</label>
+                    <input type="url" id="ytLink" name="ytLink" placeholder="https://youtube.com/embed/...">
+                </div>
+                
+                <!-- Site Type -->
+                <div class="form-group">
+                    <label>Site Type <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="pagesSingle" name="pages" value="Single page" required>
+                            <label for="pagesSingle">Single page</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="pagesMulti" name="pages" value="Multi page" checked>
+                            <label for="pagesMulti">Multi page <span class="hint">(At extra cost)</span></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- About Brand -->
+                <div class="form-group">
+                    <label for="about">About the Brand</label>
+                    <textarea id="about" name="about" rows="3" placeholder="Tell us about your brand..."></textarea>
+                </div>
+                
+                <!-- Color Pickers -->
+                <div class="form-group">
+                    <label>Color Palette</label>
+                    <div class="color-pickers">
+                        <div class="color-picker">
+                            <input type="color" id="clrPrimary" name="clrPrimary" value="#0f5132">
+                            <label for="clrPrimary">Primary</label>
+                        </div>
+                        <div class="color-picker">
+                            <input type="color" id="clrSecondary" name="clrSecondary" value="#198754">
+                            <label for="clrSecondary">Secondary</label>
+                        </div>
+                        <div class="color-picker">
+                            <input type="color" id="clrHighlight" name="clrHighlight" value="#48c78e">
+                            <label for="clrHighlight">Highlight</label>
+                        </div>
+                        <div class="color-picker">
+                            <input type="color" id="clrAccent" name="clrAccent" value="#d1e7dd">
+                            <label for="clrAccent">Accent</label>
+                        </div>
+                    </div>
+                    
+                    <div class="color-suggestions">
+                        <h4>Suggested Palettes:</h4>
+                        <div class="color-palettes">
+                            <div class="palette" onclick="setPalette(['#0d3b2a','#1a936f','#88d498','#c6dabf'])">
+                                <div class="palette-color" style="background:#0d3b2a"></div>
+                                <div class="palette-color" style="background:#1a936f"></div>
+                                <div class="palette-color" style="background:#88d498"></div>
+                                <div class="palette-color" style="background:#c6dabf"></div>
+                            </div>
+                            <div class="palette" onclick="setPalette(['#2d6a4f','#40916c','#52b788','#d8f3dc'])">
+                                <div class="palette-color" style="background:#2d6a4f"></div>
+                                <div class="palette-color" style="background:#40916c"></div>
+                                <div class="palette-color" style="background:#52b788"></div>
+                                <div class="palette-color" style="background:#d8f3dc"></div>
+                            </div>
+                            <div class="palette" onclick="setPalette(['#1b4332','#2d6a4f','#4ea8de','#caf0f8'])">
+                                <div class="palette-color" style="background:#1b4332"></div>
+                                <div class="palette-color" style="background:#2d6a4f"></div>
+                                <div class="palette-color" style="background:#4ea8de"></div>
+                                <div class="palette-color" style="background:#caf0f8"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Background Animation -->
+                <div class="form-group">
+                    <label>Background Animation?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="bgAnimYes" name="bgAnim" value="yes">
+                            <label for="bgAnimYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="bgAnimNo" name="bgAnim" value="no" checked>
+                            <label for="bgAnimNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group hidden" id="animDescGroup">
+                    <label for="animDesc">Animation Details</label>
+                    <textarea id="animDesc" name="animDesc" rows="2" placeholder="Describe the animation you want..."></textarea>
+                </div>
+                
+                <!-- Inspiration -->
+                <div class="form-group">
+                    <label for="inspire">Inspiration Website Link</label>
+                    <input type="url" id="inspire" name="inspire" placeholder="https://example.com">
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="form-group">
+                    <label for="phone">Contact Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+1 234 567 8900">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email ID <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                </div>
+                
+                <!-- Floating Button -->
+                <div class="form-group">
+                    <label>Floating Button Position</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="floatPosScreen" name="floatPos" value="On-screen">
+                            <label for="floatPosScreen">On-screen</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="floatPosBottom" name="floatPos" value="Bottom" checked>
+                            <label for="floatPosBottom">Bottom</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Floating Button Style</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="floatStyleExpandable" name="floatStyle" value="Expandable">
+                            <label for="floatStyleExpandable">Expandable</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="floatStyleSeparate" name="floatStyle" value="Separate buttons" checked>
+                            <label for="floatStyleSeparate">Separate buttons</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Access -->
+                <div class="form-group">
+                    <label>Need Backend Access?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="needBackendYes" name="needBackend" value="yes">
+                            <label for="needBackendYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="needBackendNo" name="needBackend" value="no" checked>
+                            <label for="needBackendNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group hidden" id="backendHelper">
+                    <div class="hint">
+                        <i class="fas fa-info-circle"></i> You'll need basic Google Sheets knowledge to manage backend data.
+                    </div>
+                </div>
+                
+                <!-- WhatsApp Number -->
+                <div class="form-group">
+                    <label for="waPublic">Public WhatsApp Number for Visitors</label>
+                    <input type="tel" id="waPublic" name="waPublic" placeholder="+1 234 567 8900">
+                </div>
+                
+                <!-- Repeatable Groups -->
+                <div class="form-group">
+                    <label>Partner Brands</label>
+                    <div id="partnersContainer">
+                        <div class="repeatable-group">
+                            <div class="form-group">
+                                <label>Brand Name</label>
+                                <input type="text" name="partnerName[]" placeholder="Brand name">
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="url" name="partnerUrl[]" placeholder="https://example.com">
+                            </div>
+                            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-another" id="addPartner">
+                        <i class="fas fa-plus"></i> Add another partner brand
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label>Personal Links</label>
+                    <div id="linksContainer">
+                        <div class="repeatable-group">
+                            <div class="form-group">
+                                <label>Link Name</label>
+                                <input type="text" name="linkName[]" placeholder="Link name">
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="url" name="linkUrl[]" placeholder="https://example.com">
+                            </div>
+                            <button type="button" class="remove-btn"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-another" id="addLink">
+                        <i class="fas fa-plus"></i> Add another personal link
+                    </button>
+                </div>
+                
+                <!-- Expectations -->
+                <div class="form-group">
+                    <label for="expect">Your Expectations / Notes</label>
+                    <textarea id="expect" name="expect" rows="3" placeholder="What are your main goals for this website?"></textarea>
+                </div>
+                
+                <!-- Deadline -->
+                <div class="form-group">
+                    <label for="deadline">Deadline / Launch Date</label>
+                    <input type="date" id="deadline" name="deadline">
+                </div>
+                
+                <!-- CTA -->
+                <div class="form-group">
+                    <label for="cta">Main Call-to-Action (CTA) Button Text</label>
+                    <input type="text" id="cta" name="cta" placeholder="e.g., Book Now, Contact Us">
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" disabled>Submit Design Request</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>By submitting this form, you agree to our <a href="#">privacy policy</a>. We'll contact you via WhatsApp to discuss your project.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle animation details
+            document.querySelectorAll('input[name="bgAnim"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    document.getElementById('animDescGroup').classList.toggle('hidden', this.value !== 'yes');
+                });
+            });
+            
+            // Toggle backend helper
+            document.querySelectorAll('input[name="needBackend"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    document.getElementById('backendHelper').classList.toggle('hidden', this.value !== 'yes');
+                });
+            });
+            
+            // Add partner brand
+            document.getElementById('addPartner').addEventListener('click', function() {
+                const container = document.getElementById('partnersContainer');
+                const group = container.firstElementChild.cloneNode(true);
+                group.querySelectorAll('input').forEach(input => input.value = '');
+                container.appendChild(group);
+                setupRemoveButtons();
+            });
+            
+            // Add personal link
+            document.getElementById('addLink').addEventListener('click', function() {
+                const container = document.getElementById('linksContainer');
+                const group = container.firstElementChild.cloneNode(true);
+                group.querySelectorAll('input').forEach(input => input.value = '');
+                container.appendChild(group);
+                setupRemoveButtons();
+            });
+            
+            // Setup remove buttons
+            function setupRemoveButtons() {
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Only remove if there's more than one group
+                        const container = this.closest('.repeatable-group').parentElement;
+                        if (container.children.length > 1) {
+                            this.closest('.repeatable-group').remove();
+                        }
+                    });
+                });
+            }
+            setupRemoveButtons();
+            
+            // Form validation
+            const form = document.getElementById('designForm');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Check form validity on input
+            form.addEventListener('input', function() {
+                submitBtn.disabled = !form.checkValidity();
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Check color selection
+                const primaryColor = document.getElementById('clrPrimary').value;
+                const secondaryColor = document.getElementById('clrSecondary').value;
+                const highlightColor = document.getElementById('clrHighlight').value;
+                const accentColor = document.getElementById('clrAccent').value;
+                
+                if (!primaryColor && !secondaryColor && !highlightColor && !accentColor) {
+                    if (!confirm('No colors selected. Would you like to use the default palette?')) {
+                        return;
+                    }
+                }
+                
+                // Check multi-page without backend
+                const pages = document.querySelector('input[name="pages"]:checked').value;
+                const needBackend = document.querySelector('input[name="needBackend"]:checked').value;
+                
+                if (pages === 'Multi page' && needBackend === 'no') {
+                    if (!confirm('Multi-page websites without backend access may incur extra costs. Continue?')) {
+                        return;
+                    }
+                }
+                
+                // Build the message
+                let message = `Website Design Request\n\n`;
+                message += `Brand: ${document.getElementById('brand').value}\n`;
+                message += `Logo: ${document.querySelector('input[name="hasLogo"]:checked').value === 'yes' ? 'Yes' : 'No'}\n`;
+                message += `Design Type: ${document.querySelector('input[name="design"]:checked').value}\n`;
+                message += `Site Type: ${pages}\n`;
+                
+                if (document.getElementById('about').value) {
+                    message += `About: ${document.getElementById('about').value}\n`;
+                }
+                
+                message += `Colors: ${primaryColor} / ${secondaryColor} / ${highlightColor} / ${accentColor}\n`;
+                
+                if (document.getElementById('ytLink').value) {
+                    message += `YouTube Video: ${document.getElementById('ytLink').value}\n`;
+                }
+                
+                const bgAnim = document.querySelector('input[name="bgAnim"]:checked').value;
+                message += `Background Animation: ${bgAnim}`;
+                if (bgAnim === 'yes' && document.getElementById('animDesc').value) {
+                    message += ` - ${document.getElementById('animDesc').value}\n`;
+                } else {
+                    message += `\n`;
+                }
+                
+                if (document.getElementById('inspire').value) {
+                    message += `Inspired by: ${document.getElementById('inspire').value}\n`;
+                }
+                
+                message += `Contact: ${document.getElementById('phone').value}, ${document.getElementById('email').value}\n`;
+                message += `Floating Button: ${document.querySelector('input[name="floatPos"]:checked').value} / ${document.querySelector('input[name="floatStyle"]:checked').value}\n`;
+                message += `Backend Needed: ${needBackend}\n`;
+                
+                if (document.getElementById('waPublic').value) {
+                    message += `Visitor WhatsApp: ${document.getElementById('waPublic').value}\n`;
+                }
+                
+                // Partner brands
+                const partnerGroups = document.querySelectorAll('#partnersContainer .repeatable-group');
+                if (partnerGroups.length > 0) {
+                    message += `\nPartner Brands:\n`;
+                    partnerGroups.forEach(group => {
+                        const name = group.querySelector('input[name="partnerName[]"]').value;
+                        const url = group.querySelector('input[name="partnerUrl[]"]').value;
+                        if (name || url) {
+                            message += `• ${name} - ${url}\n`;
+                        }
+                    });
+                }
+                
+                // Personal links
+                const linkGroups = document.querySelectorAll('#linksContainer .repeatable-group');
+                if (linkGroups.length > 0) {
+                    message += `\nPersonal Links:\n`;
+                    linkGroups.forEach(group => {
+                        const name = group.querySelector('input[name="linkName[]"]').value;
+                        const url = group.querySelector('input[name="linkUrl[]"]').value;
+                        if (name || url) {
+                            message += `• ${name} - ${url}\n`;
+                        }
+                    });
+                }
+                
+                if (document.getElementById('expect').value) {
+                    message += `\nExpectations: ${document.getElementById('expect').value}\n`;
+                }
+                
+                if (document.getElementById('deadline').value) {
+                    message += `Deadline: ${document.getElementById('deadline').value}\n`;
+                }
+                
+                if (document.getElementById('cta').value) {
+                    message += `CTA: ${document.getElementById('cta').value}\n`;
+                }
+                
+                // Encode and open WhatsApp
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/918082218234?text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+        
+        // Set color palette
+        function setPalette(colors) {
+            document.getElementById('clrPrimary').value = colors[0];
+            document.getElementById('clrSecondary').value = colors[1];
+            document.getElementById('clrHighlight').value = colors[2];
+            document.getElementById('clrAccent').value = colors[3];
+        }
+    </script>
+</body>
+</html>
