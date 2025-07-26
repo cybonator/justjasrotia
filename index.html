@@ -3,1159 +3,881 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS Jasrotia | Navigating Officer & Digital Creator</title>
+    <title>Netbiz | Affordable Web Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --navy: #0D1B2A;
-            --teal: #16DB93;
-            --light-navy: #1B263B;
-            --gray: #E0E1DD;
-            --dark-gray: #121212;
-            --mid-gray: #1E1E1E;
+            --moss-green: #334D42;
+            --warm-brown: #8B7355;
+            --blue: #4A6FA5;
+            --light-green: #5C8D7E;
+            --dark-green: #1E2E28;
+            --light-gray: #E0E1DD;
         }
         
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--navy) 50%, var(--mid-gray) 100%);
-            color: white;
-            scroll-behavior: smooth;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
             overflow-x: hidden;
-            background-attachment: fixed;
+            position: relative;
         }
         
         h1, h2, h3, h4 {
             font-family: 'Inter', sans-serif;
+            font-weight: 600;
         }
         
-        .text-teal {
-            color: var(--teal);
+        .text-moss-green {
+            color: var(--moss-green);
         }
         
-        .bg-teal {
-            background-color: var(--teal);
+        .bg-moss-green {
+            background-color: var(--moss-green);
         }
         
-        .border-teal {
-            border-color: var(--teal);
+        .border-moss-green {
+            border-color: var(--moss-green);
         }
         
-        .hero-overlay {
-            background: rgba(13, 27, 42, 0.7);
+        .text-warm-brown {
+            color: var(--warm-brown);
+        }
+        
+        .bg-warm-brown {
+            background-color: var(--warm-brown);
+        }
+        
+        .text-blue {
+            color: var(--blue);
+        }
+        
+        .bg-blue {
+            background-color: var(--blue);
+        }
+        
+        /* Asteroid background */
+        #asteroid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .asteroid {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(51,77,66,0.15) 0%, rgba(51,77,66,0.1) 70%, transparent 100%);
+            opacity: 0.8;
+            transform: translateZ(0);
+        }
+        
+        /* Logo animation */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .logo-animation {
+            animation: float 6s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-animation:hover {
+            animation: none;
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* FAB Button */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+        
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--moss-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .fab-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        
+        .fab-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .fab-menu.open {
+            width: 220px;
+            height: auto;
+            opacity: 1;
+        }
+        
+        .fab-option {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .fab-option:last-child {
+            border-bottom: none;
+        }
+        
+        .fab-option:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .fab-option i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .fab-option.instagram {
+            color: #E1306C;
+        }
+        
+        .fab-option.call {
+            color: var(--moss-green);
+        }
+        
+        .fab-option.whatsapp {
+            color: #25D366;
+        }
+        
+        .fab-option.form {
+            color: var(--blue);
+        }
+        
+        .fab-option.instructions {
+            color: var(--warm-brown);
+        }
+        
+        /* Services Section */
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--moss-green);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(51,77,66,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--moss-green);
+            font-size: 1.8rem;
+        }
+        
+        .service-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            background: var(--moss-green);
+            color: white;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .service-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(51,77,66,0.2);
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            background: white;
+            color: var(--moss-green);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid var(--moss-green);
+        }
+        
+        .cta-btn:hover {
+            background: var(--moss-green);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+        
+        .price-tag {
+            background: var(--warm-brown);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        /* Stats */
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
         
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--teal);
+            color: var(--moss-green);
+            margin-bottom: 10px;
         }
         
-        .skill-chip {
-            background: var(--light-navy);
-            border: 1px solid rgba(22, 219, 147, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .skill-chip:hover {
-            transform: translateY(-5px);
-            border-color: var(--teal);
-            box-shadow: 0 10px 15px -3px rgba(22, 219, 147, 0.1);
-        }
-        
-        .project-card {
-            background: var(--light-navy);
-            border-radius: 8px;
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--moss-green) 0%, var(--dark-green) 100%);
+            border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            position: relative;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(22, 219, 147, 0.1);
-        }
-        
-        .consultation-card {
-            background: rgba(22, 219, 147, 0.05);
-            border: 1px solid rgba(22, 219, 147, 0.2);
-        }
-        
-        .calculator-container {
-            background: var(--light-navy);
-            border-radius: 10px;
-        }
-        
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--teal);
-            color: var(--navy);
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 1000;
-        }
-        
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-        
-        .mobile-menu {
-            display: none;
-            position: fixed;
+        .cta-pattern {
+            position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
-            width: 70%;
-            background: var(--light-navy);
-            z-index: 100;
-            padding: 20px;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
-        
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 99;
-        }
-        
-        .mobile-overlay.open {
-            display: block;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-video {
-                display: none;
-            }
-            
-            .hero-image {
-                display: block;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .project-card {
-                max-width: 100%;
-            }
-            
-            .consultation-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stat-number {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-        }
-        
-        .social-link {
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-3px);
-            color: var(--teal);
-        }
-        
-        .section-title {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--teal);
-        }
-        
-        .instagram-cta {
-            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-            color: white;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        
-        .instagram-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(225, 48, 108, 0.3);
-        }
-        
-        .instagram-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .instagram-icon {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        
-        /* New styles for clients section */
-        .clients-section {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .client-bubble {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #1e2a38, #16202d);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(22, 219, 147, 0.2);
-        }
-        
-        .client-bubble:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 12px 30px rgba(22, 219, 147, 0.2);
-            border-color: var(--teal);
-        }
-        
-        .client-bubble img {
-            max-width: 70%;
-            max-height: 70%;
-            filter: grayscale(100%) brightness(150%);
-            transition: filter 0.3s ease;
-        }
-        
-        .client-bubble:hover img {
-            filter: grayscale(0%) brightness(100%);
-        }
-        
-        .client-bubble::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(22, 219, 147, 0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .client-bubble:hover::before {
-            opacity: 1;
-        }
-        
-        .client-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        /* New styles for offer section */
-        .offer-section {
-            background: linear-gradient(to right, #0a1929, #121f2f);
-            border-top: 1px solid rgba(22, 219, 147, 0.1);
-            border-bottom: 1px solid rgba(22, 219, 147, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .offer-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(22, 219, 147, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(22, 219, 147, 0.05) 0%, transparent 20%);
-            pointer-events: none;
-        }
-        
-        .offer-card {
-            background: linear-gradient(145deg, #1b263b, #16202d);
-            border-radius: 15px;
-            padding: 30px;
-            height: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .offer-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border-color: rgba(22, 219, 147, 0.3);
-        }
-        
-        .offer-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(22, 219, 147, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: var(--teal);
-        }
-        
-        .offer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .how-it-works {
-            background: rgba(22, 219, 147, 0.05);
-            border-left: 4px solid var(--teal);
-            padding: 20px 30px;
-            border-radius: 0 10px 10px 0;
-            margin: 40px 0;
-        }
-        
-        .why-me {
-            background: linear-gradient(to right, rgba(22, 219, 147, 0.05), transparent);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 40px;
-        }
-        
-        .feature-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(22, 219, 147, 0.1);
-            border-radius: 50%;
-            margin-right: 10px;
-            color: var(--teal);
-        }
-        
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(22, 219, 147, 0.3), transparent);
-            margin: 50px auto;
-            width: 80%;
-            max-width: 800px;
-        }
-        
-        /* New theme elements */
-        .theme-element {
-            position: absolute;
-            z-index: 0;
-            opacity: 0.03;
-            pointer-events: none;
-        }
-        
-        .theme-element-1 {
-            top: 10%;
-            left: 5%;
-            font-size: 120px;
-            transform: rotate(-15deg);
-        }
-        
-        .theme-element-2 {
-            top: 40%;
-            right: 5%;
-            font-size: 150px;
-            transform: rotate(25deg);
-        }
-        
-        .theme-element-3 {
-            bottom: 15%;
-            left: 10%;
-            font-size: 100px;
-            transform: rotate(10deg);
-        }
-        
-        .code-bg {
-            background-image: 
-                linear-gradient(rgba(22, 219, 147, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(22, 219, 147, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        
-        /* New animation container */
-        .coding-animation-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 300px;
-            margin: 50px auto 0;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(145deg, #0a1929, #0d1b2a);
-        }
-        
-        .sea-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, #1a3a5f, #0d1b2a);
-            overflow: hidden;
-        }
-        
-        .wave {
-            position: absolute;
-            bottom: 0;
-            width: 200%;
-            height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23016b9d" opacity="0.4"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23016b9d" opacity="0.4"/></svg>');
-            background-size: 1200px 100px;
-            animation: wave 15s linear infinite;
-        }
-        
-        .wave:nth-child(2) {
-            bottom: -10px;
-            opacity: 0.5;
-            animation: wave 18s linear infinite reverse;
-        }
-        
-        .wave:nth-child(3) {
-            bottom: -20px;
+            width: 40%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="10" height="10" fill="rgba(255,255,255,0.05)" /></svg>');
             opacity: 0.2;
-            animation: wave 20s linear infinite;
         }
         
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        /* Footer */
+        footer {
+            background: var(--dark-green);
+            color: rgba(255,255,255,0.7);
         }
         
-        .coding-station {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 10;
+        .footer-link {
+            color: rgba(255,255,255,0.7);
+            transition: color 0.2s ease;
         }
         
-        .coding-desk {
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to bottom, #5d4037, #3e2723);
-            border-radius: 5px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        .footer-link:hover {
+            color: white;
         }
         
-        .monitor {
-            width: 80%;
-            height: 180px;
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 10px;
-            margin-bottom: 15px;
+        /* Kickstart Section */
+        .kickstart-section {
+            background: linear-gradient(120deg, #f5f5f5 0%, #e9f0ec 100%);
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
         
-        .monitor-screen {
+        .kickstart-badge {
             position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            background: #0a0a23;
-            border-radius: 5px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #16DB93;
-            overflow: hidden;
-        }
-        
-        .terminal-code {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 15px;
-            white-space: pre;
-        }
-        
-        .camera {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-        }
-        
-        .camera-lens {
-            width: 20px;
-            height: 20px;
-            background: #1a3a5f;
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .camera-lens::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #16DB93;
-            border-radius: 50%;
-            top: 5px;
-            left: 5px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-        
-        .typing-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #16DB93;
-            margin-left: 4px;
-            animation: blink 0.7s infinite;
-            vertical-align: middle;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        .date-display {
-            position: absolute;
-            top: -50px;
-            right: 300px;
-            background: rgba(22, 219, 147, 0.1);
-            padding: 10px 15px;
-            border-radius: 30px;
-            font-size: 14px;
+            top: 20px;
+            right: -40px;
+            background: var(--warm-brown);
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
             font-weight: 600;
-            z-index: 10;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(22, 219, 147, 0.2);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        
+        /* Maintenance Pricing */
+        .price-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .price-label {
+            font-weight: 700;
+            color: var(--moss-green);
+            font-size: 1.1rem;
+        }
+        
+        .price-value {
+            font-weight: 700;
+            color: var(--warm-brown);
+            font-size: 1.3rem;
+        }
+        
+        .logo-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        /* Improved logo sizing */
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-logo {
+                width: 220px;
+                height: 220px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Theme elements -->
-    <div class="theme-element theme-element-1">
-        <i class="fas fa-anchor"></i>
-    </div>
-    <div class="theme-element theme-element-2">
-        <i class="fas fa-code"></i>
-    </div>
-    <div class="theme-element theme-element-3">
-        <i class="fas fa-globe-asia"></i>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu-btn fixed top-4 right-4 z-50 text-2xl text-teal md:hidden">
-        <i class="fas fa-bars" id="menu-toggle"></i>
-    </div>
+    <!-- Asteroid Background -->
+    <div id="asteroid-bg"></div>
     
-    <div class="mobile-overlay" id="mobile-overlay"></div>
-    
-    <div class="mobile-menu" id="mobile-menu">
-        <div class="text-right mb-8">
-            <i class="fas fa-times text-2xl text-teal" id="close-menu"></i>
-        </div>
-        <nav class="flex flex-col space-y-6">
-            <a href="#" class="text-xl py-2 border-b border-gray-700">Home</a>
-            <a href="#about" class="text-xl py-2 border-b border-gray-700">About</a>
-            <a href="#skills" class="text-xl py-2 border-b border-gray-700">Skills</a>
-            <a href="#work" class="text-xl py-2 border-b border-gray-700">Projects</a>
-            <a href="#clients" class="text-xl py-2 border-b border-gray-700">Clients</a>
-            <a href="#offer" class="text-xl py-2 border-b border-gray-700">Offer</a>
-            <a href="#consultation" class="text-xl py-2 border-b border-gray-700">Consultation</a>
-            <a href="#calculator" class="text-xl py-2 border-b border-gray-700">Calculator</a>
-            <a href="#contact" class="text-xl py-2 border-b border-gray-700">Contact</a>
-        </nav>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-navy opacity-80 z-0"></div>
-        <div class="relative z-20 text-center px-4">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-down">
-                AS Jasrotia
-            </h1>
-            <div class="text-xl md:text-3xl mb-8" data-aos="fade-down" data-aos-delay="100">
-                <span class="text-teal">Navigating Officer</span> • 
-                <span class="text-teal">Web-App Builder</span> • 
-                <span class="text-teal">Video Editor</span>
+    <!-- Header/Navigation -->
+    <header class="py-6 px-4 md:px-8 shadow-sm bg-white">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Logo + Brand -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 shrink-0">
+                    <!-- Using reliable logo source -->
+                     <img
+          src="./netbiz.png"
+          alt="Netbiz logo"
+          class="w-full h-full object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+                </div>
+                <h1 class="text-2xl font-bold text-[#198754]">Netbiz</h1>
             </div>
-            <button onclick="document.getElementById('work').scrollIntoView({behavior: 'smooth'})" 
-                class="bg-teal text-navy font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 mb-12"
-                data-aos="fade-up" data-aos-delay="200">
-                Explore My Work
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#services"    class="hover:text-[#198754]">Services</a>
+                <a href="#kickstart"   class="hover:text-[#198754]">Kick‑Start</a>
+                <a href="#maintenance" class="hover:text-[#198754]">Maintenance</a>
+                <a href="#contact"     class="hover:text-[#198754]">Contact</a>
+            </nav>
+
+            <!-- Mobile hamburger -->
+            <button id="burger" class="md:hidden text-2xl text-[#198754]">
+                &#9776;
             </button>
-            
-            <!-- Date Display -->
-            <div class="date-display" id="current-date"></div>
-            
-            <!-- Animation Container -->
-            <div class="coding-animation-container" data-aos="fade-up" data-aos-delay="300">
-                <div class="sea-background">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                </div>
-                
-                <div class="coding-station">
-                    <div class="monitor">
-                        <div class="monitor-screen">
-                            <div class="terminal-code" id="terminal-code"></div>
-                        </div>
-                    </div>
-                    <div class="coding-desk"></div>
-                </div>
-                
-                <div class="camera">
-                    <div class="camera-lens"></div>
-                </div>
-            </div>
         </div>
-    </section>
+    </header>
+    
+    <!-- Hero Section -->
+   <link rel="preload" as="image" href="./netbiz.png" />
 
-    <!-- About Me -->
-    <section id="about" class="py-20 px-4 max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4" data-aos="fade-up">About Me</h2>
-            <div class="w-24 h-1 bg-teal mx-auto mb-8" data-aos="fade-up"></div>
-            <p class="text-xl max-w-2xl mx-auto" data-aos="fade-up">
-                Maritime professional with a passion for technology and creative media. 
-                Combining years of sea experience with modern digital skills to create 
-                solutions that bridge physical and digital worlds.
-            </p>
-        </div>
+<section class="py-16 md:py-24 px-4">
+  <div class="max-w-6xl mx-auto text-center">
+    <!-- Logo -->
+    <div class="flex justify-center mb-8">
+      <div
+        class="rounded-full bg-transparent flex items-center justify-center overflow-hidden hero-logo w-28 h-28 md:w-36 md:h-36"
+      >
+        <!-- If netbiz.png sits next to this HTML file -->
+        <img
+          src="./netbiz.png"
+          alt="Netbiz logo"
+          class="w-full h-full object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div class="text-center" data-aos="fade-up">
-                <div class="stat-number mb-2" id="seaMiles">0</div>
-                <p class="text-lg">Sea Miles Navigated</p>
-            </div>
-            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-number mb-2" id="webApps">0</div>
-                <p class="text-lg">Web Apps Developed</p>
-            </div>
-            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-number mb-2" id="videosEdited">0</div>
-                <p class="text-lg">Videos Edited</p>
-            </div>
-        </div>
-    </section>
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-moss-green">
+      Websites That Don't Burn Your Pocket
+    </h1>
 
-    <!-- Skills Row -->
-    <section id="skills" class="py-20 bg-light-navy code-bg">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-up">Technical Skills</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up">
-                    <div class="flex items-center mb-4">
-                        <i class="fab fa-html5 text-3xl text-orange-500 mr-3"></i>
-                        <h3 class="text-xl font-bold">HTML5</h3>
-                    </div>
-                    <p>Built responsive, accessible websites with semantic markup</p>
-                </div>
-                
-                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-4">
-                        <i class="fab fa-css3-alt text-3xl text-blue-500 mr-3"></i>
-                        <h3 class="text-xl font-bold">CSS3</h3>
-                    </div>
-                    <p>Created modern layouts with Flexbox, Grid, and animations</p>
-                </div>
-                
-                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-4">
-                        <i class="fab fa-js text-3xl text-yellow-400 mr-3"></i>
-                        <h3 class="text-xl font-bold">JavaScript</h3>
-                    </div>
-                    <p>Developed interactive features with vanilla JS and APIs</p>
-                </div>
-                
-                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-table text-3xl text-green-500 mr-3"></i>
-                        <h3 class="text-xl font-bold">Google Sheets API</h3>
-                    </div>
-                    <p>Integrated with Google Sheets for dynamic data solutions</p>
-                </div>
-                
-                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-film text-3xl text-purple-500 mr-3"></i>
-                        <h3 class="text-xl font-bold">DaVinci Resolve</h3>
-                    </div>
-                    <p>Professional color grading and video editing for clients</p>
-                </div>
-                
-                <div class="skill-chip p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-ship text-3xl text-teal mr-3"></i>
-                        <h3 class="text-xl font-bold">Maritime Tech</h3>
-                    </div>
-                    <p>Developed specialized tools for the shipping industry</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="text-xl font-bold text-warm-brown mb-4">
+      Starting ₹4999 Only
+    </div>
 
-    <!-- Project Hub -->
-    <section id="work" class="py-20 px-4 max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Project Hub</h2>
-        <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
-        
-        <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">
-            <button class="filter-btn px-4 py-2 rounded-full bg-teal text-navy font-medium" data-filter="all">All</button>
-            <button class="filter-btn px-4 py-2 rounded-full border border-teal hover:bg-teal hover:text-navy transition" data-filter="web">Web Apps</button>
-            <button class="filter-btn px-4 py-2 rounded-full border border-teal hover:bg-teal hover:text-navy transition" data-filter="video">Video Edits</button>
-            <button class="filter-btn px-4 py-2 rounded-full border border-teal hover:bg-teal hover:text-navy transition" data-filter="sea">Maritime Tools</button>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
-            <!-- Project 1 -->
-            <div class="project-card" data-type="sea">
-                <div class="h-48 bg-blue-900 rounded-t-lg flex items-center justify-center">
-                    <i class="fas fa-calculator text-6xl text-blue-400"></i>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">NRE Period Calculator</h3>
-                    <p class="text-gray-300 mb-4">Calculate Notice of Readiness periods for maritime operations.</p>
-                    <div class="flex space-x-3">
-                        <a href="https://cybonator.github.io/justjasrotia/sea.html" target="_blank" class="px-4 py-2 bg-teal text-navy rounded-md font-medium">Demo</a>
-                        <button class="px-4 py-2 border border-teal text-teal rounded-md font-medium">GitHub</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 2 -->
-            <div class="project-card" data-type="video">
-                <div class="h-48 bg-purple-900 rounded-t-lg flex items-center justify-center">
-                    <i class="fas fa-film text-6xl text-purple-400"></i>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">Video Editing Project</h3>
-                    <p class="text-gray-300 mb-4">Professional video editing for YouTube channel content.</p>
-                    <div class="flex space-x-3">
-                        <a href="https://youtu.be/uNePKtKUJ3M" target="_blank" class="px-4 py-2 bg-teal text-navy rounded-md font-medium">Demo</a>
-                        <button class="px-4 py-2 border border-teal text-teal rounded-md font-medium">Details</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 3 -->
-            <div class="project-card" data-type="web">
-                <div class="h-48 bg-green-900 rounded-t-lg flex items-center justify-center">
-                    <i class="fas fa-boxes text-6xl text-green-400"></i>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">Inventory Management</h3>
-                    <p class="text-gray-300 mb-4">Web application for managing enterprise inventory.</p>
-                    <div class="flex space-x-3">
-                        <a href="https://adityasinghjasrotia.github.io/jasrotiaenterprise.github.io/" target="_blank" class="px-4 py-2 bg-teal text-navy rounded-md font-medium">Demo</a>
-                        <button class="px-4 py-2 border border-teal text-teal rounded-md font-medium">GitHub</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+      We build landing pages for small businesses and creators who can't afford
+      overpriced agency packages.
+    </p>
 
-    <!-- Clients Section -->
-    <section id="clients" class="py-20 clients-section">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" data-aos="fade-up">Trusted By Industry Leaders</h2>
-            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
-            
-            <div class="client-grid" data-aos="fade-up">
-                <div class="text-center">
-                    <div class="client-bubble" onclick="window.open('https://www.maersk.com', '_blank')">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDc2Q0QiLz4KICA8cGF0aCBkPSJNNTcuMjQzOSAzOC4xODM4TDUzLjI0MzkgMzAuMTgzOEg0NC43NTYxTDMwLjc1NjEgNTguMTgzOEgzOC4yNDM5TDQyLjI0MzkgNTAuMTgzOEg1NC43NTYxTDU4Ljc1NjEgNTguMTgzOEg2Ni4yNDM5TDUyLjI0MzkgMzAuMTgzOEg0NS43NTYxTDU3LjI0MzkgNTAuMTgzOEg1Ny4yNDM5VjM4LjE4MzhINjYuMjQzOVYzMC4xODM4SDUzLjI0MzlMNTcuMjQzOSAzOC4xODM4WiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNNzUuMjQzOSAzOC4xODM4TDc5LjI0MzkgMzAuMTgzOEg4Ny43MzYxTDEwMS43MzYgNTguMTgzOEg5NC4yNDM5TDkwLjI0MzkgNTAuMTgzOEg3Ny43MzYxTDczLjczNjEgNTguMTgzOEg2Ni4yNDM5TDgwLjI0MzkgMzAuMTgzOEg4Ni43MzYxTDc1LjI0MzkgNTAuMTgzOEg3NS4yNDM5VjM4LjE4MzhINjYuMjQzOVYzMC4xODM4SDc5LjI0MzlMNzUuMjQzOSAzOC4xODM4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Maersk Line">
-                    </div>
-                    <p class="mt-4 font-medium">Maersk Line</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="client-bubble" onclick="window.open('https://www.msc.com', '_blank')">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDhDQzAiLz4KICA8cGF0aCBkPSJNNDQgNjRDNCA2NCA0IDk0IDQgOTRIMTI0QzEyNCA5NCAxMjQgNjQgMTI0IDY0QzEwNCA2NCA4NCA2NCA2NCA2NEM0NCA2NCA0NCA2NCA0NCA2NFoiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTg0IDY0QzY0IDY0IDQ0IDY0IDI0IDY0QzQgNjQgNCAzNCA0IDM0SDg0Qzg0IDM0IDg0IDY0IDg0IDY0WiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNODQgNjRDODQgNjQgODQgMzQgODQgMzRIMTI0QzEyNCAzNCAxMjQgNjQgMTI0IDY0QzEwNCA2NCA4NCA2NCA2NCA2NEM4NCA2NCA4NCA2NCA4NCA2NFoiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTQ0IDY0QzQ0IDY0IDQ0IDk0IDQ0IDk0SDg0Qzg0IDk0IDg0IDY0IDg0IDY0QzY0IDY0IDQ0IDY0IDQ0IDY0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="MSC">
-                    </div>
-                    <p class="mt-4 font-medium">MSC</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="client-bubble" onclick="window.open('https://www.coscoshipping.com', '_blank')">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiNDMDAwMTkiLz4KICA8cGF0aCBkPSJNNjQgMzZDNjQgMzYgOTIgMzYgOTIgMzZDMTAwIDM2IDEwOCA0NCAxMDggNTJDMTE2IDYwIDEwOCA2OCAxMDggNjhMODAgOTZDODAgOTYgNzIgMTA0IDY0IDEwNEM1NiAxMDQgNDggOTYgNDggOTZMMjAgNjhDMjAgNjggMTIgNjAgMjAgNTJDMjggNDQgMzYgMzYgNDQgMzZDNTIgMzYgNjQgMzYgNjQgMzZaIiBmaWxsPSJ3aGl0ZSIvPgogIDxwYXRoIGQ9Ik03MiA0OEM3MiA0OCA4OCA0OCA4OCA0OEM5NiA0OCA5NiA1NiA5NiA1NkM5NiA2NCA4OCA2NCA4OCA2NEw3MiA4MEM3MiA4MCA2NCA4OCA2NCA4OEM2NCA4OCA1NiA4MCA1NiA4MEw0MCA2NEM0MCA2NCAzMiA2NCAzMiA1NkMzMiA0OCA0MCA0OCA0MCA0OEM1NiA0OCA3MiA0OCA3MiA0OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="COSCO Shipping">
-                    </div>
-                    <p class="mt-4 font-medium">COSCO Shipping</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="client-bubble" onclick="window.open('https://www.evergreen-marine.com', '_blank')">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDc4MDAiLz4KICA8cGF0aCBkPSJNNjQgMzJDNjQgMzIgOTYgMzIgOTYgMzJDMTEyIDMyIDEyMCA0MCAxMjAgNTZDMTIwIDcyIDExMiA4MCA5NiA4MEg2NEM0OCA4MCAzMiA2NCAzMiA0OEMzMiAzMiA0OCAzMiA0OCAzMkM1NiAzMiA2NCAzMiA2NCAzMloiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTY0IDk2QzY0IDk2IDMyIDk2IDMyIDk2QzE2IDk2IDggODggOCA3MkM4IDU2IDE2IDQ4IDMyIDQ4SDY0QzgwIDQ4IDk2IDY0IDk2IDgwQzk2IDk2IDgwIDk2IDgwIDk2QzcyIDk2IDY0IDk2IDY0IDk2WiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNMzIgNjRDMzIgNjQgMCA2NCAwIDY0QzAgODAgOCA4OCAyNCA4OEM0MCA4OCA0OCA4MCA0OCA2NEM0OCA0OCA0MCA0MCAyNCA0MEM4IDQwIDAgNDggMCA2NEMwIDgwIDggODggMjQgODhDMzIgODggMzIgODAgMzIgODBDMzIgODAgMjQgODAgMjQgNjRDMjQgNDggMzIgNDggMzIgNDhDMzIgNDggNDAgNDggNDAgNjRDNDAgODAgMzIgODAgMzIgODBDMzIgODAgNDAgODAgNDAgODBDNDAgOTYgMzIgMTA0IDI0IDEwNEM4IDEwNCAwIDk2IDAgODBDMCA2NCA4IDU2IDI0IDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAyNCAxMDRDMTYgMTA0IDggOTYgOCA4MEM4IDY0IDE2IDU2IDMyIDU2QzQ4IDU2IDU2IDY0IDU2IDgwQzU2IDk2IDQ4IDEwNCAzMiAxMDRDMTYgMTA0IDggOTYgOCA4MEM4IDY0IDE2IDU2IDMyIDU2QzQ4IDU2IDU2IDY0IDU2IDgwQzU2IDk2IDQ4IDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMiAxMDRDMjQgMTA0IDE2IDk2IDE2IDgwQzE2IDY0IDI0IDU2IDMyIDU2QzQwIDU2IDQ4IDY0IDQ4IDgwQzQ4IDk2IDQwIDEwNCAzMyAxMDRDMjUgMTA0IDE3IDk2IDE3IDgwQzE3IDY0IDI1IDU2IDMzIDU2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Evergreen Marine">
-                    </div>
-                    <p class="mt-4 font-medium">Evergreen Marine</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="client-bubble" onclick="window.open('https://www.hapag-lloyd.com', '_blank')">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIGZpbGw9IiMwMDY5QTgiLz4KICA8cGF0aCBkPSJNMzIgMzJIMTBWMTAwSDMyVjMyWiIgZmlsbD0id2hpdGUiLz4KICA8cGF0aCBkPSJNMzIgMzJINTBWMTAwSDMyVjMyWiIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC43Ii8+CiAgPHBhdGggZD0iTTUwIDMySDY4VjEwMEg1MFYzMloiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuNSIvPgogIDxwYXRoIGQ9Ik02OCAzMkg4NlYxMDBINjhWMzJaIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KICA8cGF0aCBkPSJNODYgMzJIMTA0VjEwMEg4NlYzMloiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgogIDxwYXRoIGQ9Ik0xMTggMzJIMTA0VjEwMEgxMThWMzJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=" alt="Hapag-Lloyd">
-                    </div>
-                    <p class="mt-4 font-medium">Hapag-Lloyd</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Special Offer Section -->
-    <section id="offer" class="py-20 offer-section">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Ready to Skyrocket Your Growth?</h2>
-            <h3 class="text-xl md:text-2xl text-center text-teal mb-16" data-aos="fade-up">Here's My No-Brainer Offer</h3>
-            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
-            
-            <div class="offer-grid" data-aos="fade-up">
-                <div class="offer-card">
-                    <div class="offer-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Zero Upfront Cost</h4>
-                    <ul class="space-y-2">
-                        <li>I start building your landing page or e-commerce app today</li>
-                        <li>You pay only when you love the result</li>
-                    </ul>
-                </div>
-                
-                <div class="offer-card">
-                    <div class="offer-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Blazing-Fast Delivery</h4>
-                    <ul class="space-y-2">
-                        <li>Single-page landing page live in 48 hours</li>
-                        <li>E-commerce prototype in 5 days</li>
-                    </ul>
-                </div>
-                
-                <div class="offer-card">
-                    <div class="offer-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Built for Creators</h4>
-                    <ul class="space-y-2">
-                        <li>WhatsApp & email lead capture</li>
-                        <li>Video embeds, social feeds, checkout flows</li>
-                    </ul>
-                </div>
-                
-                <div class="offer-card">
-                    <div class="offer-icon">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Pocket-Friendly Pricing</h4>
-                    <ul class="space-y-2">
-                        <li>Starter landing pages from ₹4,999</li>
-                        <li>Full e-commerce apps from ₹14,999</li>
-                        <li>Flat rates. No surprises</li>
-                    </ul>
-                </div>
-                
-                <div class="offer-card">
-                    <div class="offer-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Risk-Free Guarantee</h4>
-                    <ul class="space-y-2">
-                        <li>30-day free tweaks & support</li>
-                        <li>100% money-back if you're not thrilled</li>
-                    </ul>
-                </div>
-                
-                <div class="offer-card">
-                    <div class="offer-icon">
-                        <i class="fas fa-gift"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Bonus Toolkit</h4>
-                    <ul class="space-y-2">
-                        <li>Free 5-min "Boost Your Conversion" video</li>
-                        <li>Quick-start guide to WhatsApp automation</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="how-it-works" data-aos="fade-up">
-                <h4 class="text-2xl font-bold mb-6 text-teal">How It Works</h4>
-                <ol class="space-y-4">
-                    <li class="flex items-start">
-                        <span class="feature-icon"><i class="fas fa-calendar-check"></i></span>
-                        <div>
-                            <strong class="block">Book a Slot:</strong> Hit the "Get Started" button below
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="feature-icon"><i class="fas fa-comments"></i></span>
-                        <div>
-                            <strong class="block">Share Your Vision:</strong> Quick form or WhatsApp chat
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="feature-icon"><i class="fas fa-couch"></i></span>
-                        <div>
-                            <strong class="block">Sit Back & Relax:</strong> I handle design, development, and testing
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="feature-icon"><i class="fas fa-heart"></i></span>
-                        <div>
-                            <strong class="block">Love It or Leave It:</strong> Only pay if you're 100% happy
-                        </div>
-                    </li>
-                </ol>
-            </div>
-            
-            <div class="why-me" data-aos="fade-up">
-                <h4 class="text-2xl font-bold mb-4 text-teal">Why Choose Me?</h4>
-                <p class="mb-6 max-w-3xl mx-auto">
-                    As a tech-savvy creator with a unique blend of maritime discipline, coding expertise, and creative vision, I focus on delivering results—not just pretty websites. My solutions are built to perform and convert.
+    <a
+      href="#services"
+      class="service-btn inline-block px-8 py-3 text-lg bg-moss-green text-white rounded-lg hover:opacity-90 transition"
+    >
+      Explore Our Services
+    </a>
+  </div>
+</section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-moss-green">Our Affordable Services</h2>
+                <div class="w-24 h-1 bg-moss-green mx-auto mb-8"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Professional web solutions that fit your budget without compromising on quality.
                 </p>
-                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" 
-                    class="bg-teal text-navy font-bold py-3 px-8 rounded-full hover:opacity-90 transition transform hover:scale-105">
-                    Get Started Today
-                </button>
             </div>
-        </div>
-    </section>
-
-    <!-- Consultation Section -->
-    <section id="consultation" class="py-20 bg-light-navy">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Consultation for Shipping Industry Jobs</h2>
-            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 consultation-grid">
-                <div class="consultation-card p-8 rounded-lg" data-aos="fade-right">
-                    <h3 class="text-xl font-bold mb-4 text-teal">Career Guidance</h3>
-                    <p class="mb-4">With years of experience in the maritime industry, I offer personalized career consultations for:</p>
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>Deck & Engineering Officers</li>
-                        <li>Maritime Graduates</li>
-                        <li>Industry Transition Advising</li>
-                        <li>Interview Preparation</li>
-                    </ul>
-                </div>
-                
-                <div class="consultation-card p-8 rounded-lg" data-aos="fade-left">
-                    <h3 class="text-xl font-bold mb-4 text-teal">Industry Insights</h3>
-                    <p class="mb-4">Stay ahead with insights on:</p>
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>Emerging Maritime Technologies</li>
-                        <li>Global Shipping Trends</li>
-                        <li>Career Growth Opportunities</li>
-                        <li>Certification Pathways</li>
-                    </ul>
-                    <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" 
-                        class="mt-6 bg-teal text-navy font-bold py-2 px-6 rounded-md">
-                        Schedule a Consultation
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Macro Calculator -->
-    <section id="calculator" class="py-20">
-        <div class="max-w-2xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Nutrition Calculator</h2>
-            <div class="w-24 h-1 bg-teal mx-auto mb-12" data-aos="fade-up"></div>
-            
-            <div class="calculator-container p-6 md:p-8" data-aos="fade-up">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div>
-                        <label class="block mb-2">Weight (kg)</label>
-                        <input type="number" id="weight" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 focus:border-teal focus:outline-none" placeholder="70" min="40" max="200">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Basic Landing Page -->
+                <div class="service-card p-8" data-aos="fade-up">
+                    <div class="service-icon">
+                        <i class="fas fa-file-code"></i>
                     </div>
-                    <div>
-                        <label class="block mb-2">Goal</label>
-                        <select id="goal" class="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 focus:border-teal focus:outline-none">
-                            <option value="maintain">Maintain Weight</option>
-                            <option value="cut">Lose Fat</option>
-                            <option value="bulk">Gain Muscle</option>
-                        </select>
+                    <span class="price-tag">Starting ₹4999</span>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-moss-green">Landing Page</h3>
+                    <p class="text-gray-600 mb-6 text-center">
+                        Perfect for small businesses and creators starting their online journey.
+                    </p>
+                    
+                    <ul class="mb-6 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Custom design tailored to your brand</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Mobile-friendly and super fast</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Hosted on GitHub - forever free hosting</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Basic SEO optimization</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center mt-8">
+                        <a href="fn.html" class="service-btn">Get Started</a>
                     </div>
                 </div>
                 
-                <button id="calculate-btn" class="w-full bg-teal text-navy font-bold py-3 rounded-md mb-8 hover:opacity-90">
-                    Calculate Macros
-                </button>
+                <!-- Advanced Package -->
+                <div class="service-card p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <span class="price-tag">Starting ₹12999</span>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-moss-green">Advanced Integration</h3>
+                    <p class="text-gray-600 mb-6 text-center">
+                    Landing page with Google Sheet integration for data collection.
+                    </p>
+                    
+                    <ul class="mb-6 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Everything in Basic Landing Page</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Google App Script integration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Data collection in Google Sheets</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Form validation and error handling</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center mt-8">
+                        <a href="fn.html" class="service-btn">Get Started</a>
+                    </div>
+                </div>
                 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-gray-700">
-                                <th class="py-3">Macro</th>
-                                <th class="py-3">Grams</th>
-                                <th class="py-3">Calories</th>
-                                <th class="py-3">% Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="results-table">
-                            <tr class="border-b border-gray-700">
-                                <td class="py-3">Protein</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3">-</td>
-                            </tr>
-                            <tr class="border-b border-gray-700">
-                                <td class="py-3">Carbs</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3">-</td>
-                            </tr>
-                            <tr>
-                                <td class="py-3">Fat</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3">-</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr class="font-bold">
-                                <td class="py-3">Total</td>
-                                <td class="py-3">-</td>
-                                <td class="py-3" id="total-calories">-</td>
-                                <td class="py-3">100%</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                <!-- Maintenance & Support -->
+                <div class="service-card p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-moss-green">Maintenance & Support</h3>
+                    <p class="text-gray-600 mb-6 text-center">
+                        Keep your digital presence running smoothly with our flexible plans.
+                    </p>
+                    
+                    <ul class="mb-6 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Affordable, transparent pricing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Quick turnaround time</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Priority support options</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-moss-green mt-1 mr-2"></i>
+                            <span>Flexible monthly or per-task payment</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center mt-8">
+                        <a href="#maintenance" class="service-btn">View Plans</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Instagram Contact Section -->
-    <section id="contact" class="py-20 px-4 bg-light-navy">
-        <div class="max-w-2xl mx-auto text-center">
-            <div class="instagram-container" data-aos="fade-up">
-                <div class="instagram-icon">
-                    <i class="fab fa-instagram text-3xl text-white"></i>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
-                <div class="w-24 h-1 bg-teal mx-auto mb-8"></div>
-                <p class="text-xl mb-8">DM me on Instagram for collaborations, inquiries, or consultations!</p>
-                <p class="text-gray-300 mb-8">I'm most responsive through Instagram DMs. Send me a message and I'll get back to you as soon as possible.</p>
-                
-                <a href="https://instagram.com/justjasrotia" target="_blank" class="instagram-cta font-bold py-3 px-8 rounded-full inline-block">
-                    <i class="fab fa-instagram mr-2"></i> Message on Instagram
-                </a>
-                
-                <div class="mt-8 text-gray-400">
-                    <p>Alternatively, you can email me:</p>
-                    <p class="text-teal font-medium mt-2">contact@asjasrotia.com</p>
+    
+    <!-- Kick-Start Initiative -->
+    <section id="kickstart" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="kickstart-section p-8 md:p-12 relative">
+                <div class="kickstart-badge">FREE OFFER</div>
+                <div class="max-w-3xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-moss-green">🎁 Kick-Start Initiative for Small Creators</h2>
+                    <p class="text-gray-700 mb-6 text-lg">
+                        We believe in supporting passionate creators who are just starting their journey. As part of our commitment to the community, we frequently launch special offers:
+                    </p>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <h3 class="text-xl font-bold text-moss-green mb-4">Free Landing Page Program</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-gift text-warm-brown mt-1 mr-2"></i>
+                                <span><strong>Completely free</strong> landing page for selected creators</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users text-warm-brown mt-1 mr-2"></i>
+                                <span>For new creators with limited budgets</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-calendar-alt text-warm-brown mt-1 mr-2"></i>
+                                <span>Limited slots available each quarter</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-heart text-warm-brown mt-1 mr-2"></i>
+                                <span>Our way to support passionate creators</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p class="text-gray-700">
+                        Whether you're a local shop owner, content creator, or freelancer - your digital presence starts here.
+                        <span class="font-semibold">Apply now for our next batch of free websites!</span>
+                    </p>
+                    
+                    <div class="mt-8">
+                        <a href="fn.html" class="service-btn inline-block">
+                            Apply for Free Website
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
+    <!-- Maintenance Pricing -->
+    <section id="maintenance" class="py-16 bg-gray-50 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-moss-green">Transparent Maintenance Pricing</h2>
+                <div class="w-24 h-1 bg-moss-green mx-auto mb-8"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Simple, affordable maintenance options with no hidden fees
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="price-card" data-aos="fade-up">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-pencil-alt text-3xl text-moss-green mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Minor Corrections</h3>
+                    </div>
+                    <div class="text-center mb-6">
+                        <div class="price-value">₹99</div>
+                        <div class="price-label">per correction</div>
+                    </div>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Text changes and updates</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Small image replacements</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Color adjustments</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Minor styling tweaks</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="price-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-plus-circle text-3xl text-moss-green mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Add/Remove Sections</h3>
+                    </div>
+                    <div class="text-center mb-6">
+                        <div class="price-value">₹200</div>
+                        <div class="price-label">per section</div>
+                    </div>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Add new content sections</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Remove existing sections</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Reorganize page layout</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Section redesign</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="price-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-star text-3xl text-moss-green mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Major Changes</h3>
+                    </div>
+                    <div class="text-center mb-6">
+                        <div class="price-value">Custom Quote</div>
+                        <div class="price-label">tailored to your needs</div>
+                    </div>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Complete page redesign</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>New functionality implementation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Integration with third-party services</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-moss-green mt-1 mr-2"></i>
+                            <span>Advanced SEO optimization</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    <i class="fas fa-info-circle text-moss-green mr-2"></i>
+                    All maintenance work is quoted upfront with no hidden fees. Most minor tasks are completed within 24-48 hours.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="py-16 bg-moss-green px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Why Choose Netbiz?</h2>
+                <div class="w-24 h-1 bg-warm-brown mx-auto mb-8"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <div class="stat-card" data-aos="fade-up">
+                    <div class="stat-number">₹4999</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Starting Price</h3>
+                    <p class="text-gray-600">Affordable solutions for every budget</p>
+                </div>
+                
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number">7 Days</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Average Delivery</h3>
+                    <p class="text-gray-600">Quick turnaround for your projects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="cta-section p-8 md:p-12 text-white">
+                <div class="cta-pattern"></div>
+                <div class="relative z-10 max-w-xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Digital Presence?</h2>
+                    <p class="mb-8 opacity-90">
+                        Let's discuss how we can help you achieve your business goals with a custom web solution.
+                    </p>
+                    <a href="fn.html" class="cta-btn inline-block">
+                        Get Started Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Footer -->
-    <footer class="py-12 px-4 text-center">
-        <div class="flex justify-center mb-6">
-            <div class="w-16 h-16 rounded-full bg-teal flex items-center justify-center text-navy mb-6">
-                <i class="fas fa-anchor text-2xl"></i>
+    <footer id="contact" class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="mr-2 w-10 h-10">
+                             <img
+          src="./netbiz.png"
+          alt="Netbiz logo"
+          class="w-full h-full object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Netbiz</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        Creating digital solutions that help businesses thrive in the online world.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="footer-link">Landing Pages</a></li>
+                        <li><a href="#services" class="footer-link">Advanced Integration</a></li>
+                        <li><a href="#maintenance" class="footer-link">Maintenance</a></li>
+                        <li><a href="#kickstart" class="footer-link">Free Websites</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Our Process</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-300"></i>
+                            <span class="footer-link">Jammu, India</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-gray-300"></i>
+                            <span class="footer-link">contact@netbiz.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-gray-300"></i>
+                            <span class="footer-link">+91 808 221 8234</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Netbiz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- FAB Button -->
+    <div class="fab-container">
+        <div class="fab-menu" id="fab-menu">
+            <div class="fab-option instructions" onclick="openInstructions()">
+                <i class="fas fa-book"></i>
+                <span>Web Instructions</span>
+            </div>
+            <div class="fab-option instagram" onclick="openInstagram()">
+                <i class="fab fa-instagram"></i>
+                <span>@justjasrotia</span>
+            </div>
+            <div class="fab-option call" onclick="makeCall()">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call Us</span>
+            </div>
+            <div class="fab-option whatsapp" onclick="openWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+            <div class="fab-option form" onclick="openContactForm()">
+                <i class="fas fa-envelope"></i>
+                <span>Contact Form</span>
             </div>
         </div>
         
-        <div class="flex justify-center space-x-6 mb-8">
-            <a href="https://github.com/adityasinghjasrotia" target="_blank" class="text-2xl hover:text-teal transition social-link">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://linkedin.com/in/aditya-jasrotia" target="_blank" class="text-2xl hover:text-teal transition social-link">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://instagram.com/justjasrotia" target="_blank" class="text-2xl hover:text-teal transition social-link">
-                <i class="fab fa-instagram"></i>
-            </a>
+        <div class="fab-main" id="fab-main">
+            <i class="fas fa-comments"></i>
         </div>
-        
-        <p class="text-gray-400">
-            © 2025 AS Jasrotia – Built at sea
-        </p>
-    </footer>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -1166,287 +888,127 @@
             once: true
         });
         
-        // Mobile menu functionality
-        const menuToggle = document.getElementById('menu-toggle');
-        const closeMenu = document.getElementById('close-menu');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.add('open');
-            mobileOverlay.classList.add('open');
-        });
-        
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            mobileOverlay.classList.remove('open');
-        });
-        
-        mobileOverlay.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            mobileOverlay.classList.remove('open');
-        });
-        
-        // Show toast notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
+        // Enhanced Asteroid background animation
+        function createAsteroidBackground() {
+            const container = document.getElementById('asteroid-bg');
+            const asteroidCount = 25;
             
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Animated stats
-        function animateValue(id, start, end, duration) {
-            try {
-                const obj = document.getElementById(id);
-                if (!obj) {
-                    console.error(`Element with ID ${id} not found`);
-                    return;
-                }
+            for (let i = 0; i < asteroidCount; i++) {
+                const asteroid = document.createElement('div');
+                asteroid.classList.add('asteroid');
                 
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const value = Math.floor(progress * (end - start) + start);
-                    obj.innerHTML = value.toLocaleString();
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
+                // Random size
+                const size = Math.random() * 120 + 30;
+                asteroid.style.width = `${size}px`;
+                asteroid.style.height = `${size}px`;
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                asteroid.style.left = `${x}%`;
+                asteroid.style.top = `${y}%`;
+                
+                // Random movement pattern
+                const duration = Math.random() * 40 + 30;
+                const delay = Math.random() * 20;
+                
+                // Create unique movement path
+                const keyframes = `
+                    @keyframes asteroid-move-${i} {
+                        0% { 
+                            transform: translate(0, 0) rotate(0deg); 
+                        }
+                        25% { 
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg); 
+                        }
+                        50% { 
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg); 
+                        }
+                        75% { 
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg); 
+                        }
+                        100% { 
+                            transform: translate(0, 0) rotate(360deg); 
+                        }
                     }
-                };
-                window.requestAnimationFrame(step);
-            } catch (error) {
-                console.error('Error animating stats:', error);
-            }
-        }
-        
-        // Initialize stats when in view
-        const statsSection = document.querySelector('#about');
-        let statsAnimated = false;
-        
-        function initStats() {
-            if (!statsAnimated) {
-                try {
-                    animateValue('seaMiles', 0, 125000, 2000);
-                    animateValue('webApps', 0, 27, 1500);
-                    animateValue('videosEdited', 0, 142, 1800);
-                    statsAnimated = true;
-                } catch (error) {
-                    console.error('Error initializing stats:', error);
-                }
-            }
-        }
-        
-        // Macro calculator with error handling
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            try {
-                const weightInput = document.getElementById('weight');
-                const weight = parseFloat(weightInput.value);
-                
-                // Validate input
-                if (isNaN(weight) || weight < 40 || weight > 200) {
-                    showToast('Please enter a valid weight between 40-200 kg');
-                    weightInput.focus();
-                    return;
-                }
-                
-                const goal = document.getElementById('goal').value;
-                
-                let protein, carbs, fat, calories;
-                
-                // Base calculations
-                protein = weight * 2.2; // 2.2g per kg of body weight
-                
-                if (goal === 'maintain') {
-                    calories = weight * 33;
-                } else if (goal === 'cut') {
-                    calories = weight * 28;
-                } else { // bulk
-                    calories = weight * 38;
-                }
-                
-                // Adjust protein based on goal
-                if (goal === 'cut') protein = weight * 2.5;
-                if (goal === 'bulk') protein = weight * 2.0;
-                
-                // Fat: 25% of calories
-                fat = (calories * 0.25) / 9;
-                
-                // Remaining calories to carbs
-                const remainingCalories = calories - (protein * 4) - (fat * 9);
-                carbs = remainingCalories / 4;
-                
-                // Update table
-                document.getElementById('results-table').innerHTML = `
-                    <tr class="border-b border-gray-700">
-                        <td class="py-3">Protein</td>
-                        <td class="py-3">${protein.toFixed(1)}g</td>
-                        <td class="py-3">${(protein * 4).toFixed(0)}</td>
-                        <td class="py-3">${((protein * 4 / calories) * 100).toFixed(0)}%</td>
-                    </tr>
-                    <tr class="border-b border-gray-700">
-                        <td class="py-3">Carbs</td>
-                        <td class="py-3">${carbs.toFixed(1)}g</td>
-                        <td class="py-3">${(carbs * 4).toFixed(0)}</td>
-                        <td class="py-3">${((carbs * 4 / calories) * 100).toFixed(0)}%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3">Fat</td>
-                        <td class="py-3">${fat.toFixed(1)}g</td>
-                        <td class="py-3">${(fat * 9).toFixed(0)}</td>
-                        <td class="py-3">${((fat * 9 / calories) * 100).toFixed(0)}%</td>
-                    </tr>
                 `;
                 
-                document.getElementById('total-calories').textContent = Math.round(calories);
+                // Add the keyframes to the document
+                const style = document.createElement('style');
+                style.textContent = keyframes;
+                document.head.appendChild(style);
                 
-                showToast('Macros calculated successfully!');
-            } catch (error) {
-                console.error('Error in macro calculator:', error);
-                showToast('An error occurred. Please try again.');
+                // Apply the animation
+                asteroid.style.animation = `asteroid-move-${i} ${duration}s linear ${delay}s infinite`;
+                
+                container.appendChild(asteroid);
             }
-        });
-        
-        // Project filtering
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                try {
-                    const filter = this.getAttribute('data-filter');
-                    
-                    // Update active button
-                    document.querySelectorAll('.filter-btn').forEach(btn => {
-                        btn.classList.remove('bg-teal', 'text-navy');
-                        btn.classList.add('border', 'border-teal');
-                    });
-                    this.classList.add('bg-teal', 'text-navy');
-                    this.classList.remove('border');
-                    
-                    // Filter projects
-                    const projects = document.querySelectorAll('.project-card');
-                    
-                    projects.forEach(project => {
-                        const type = project.getAttribute('data-type');
-                        
-                        if (filter === 'all' || type === filter) {
-                            project.style.display = 'block';
-                        } else {
-                            project.style.display = 'none';
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error filtering projects:', error);
-                }
-            });
-        });
-        
-        // Initialize stats when section is in view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    initStats();
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        if (statsSection) {
-            observer.observe(statsSection);
-        } else {
-            console.error('Stats section not found');
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    mobileMenu.classList.remove('open');
-                    mobileOverlay.classList.remove('open');
-                }
-            });
-        });
-        
-        // Handle form input validation
-        document.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('input', function() {
-                if (this.checkValidity()) {
-                    this.classList.remove('border-red-500');
-                } else {
-                    this.classList.add('border-red-500');
-                }
-            });
-        });
-        
-        // Terminal typing animation
-        const terminalCode = document.getElementById('terminal-code');
-        const codeLines = [
-            "> npm init maritime-app",
-            "Creating new maritime application...",
-            "> Installing navigation tools...",
-            "> Installing web development modules...",
-            "> Installing video editing suite...",
-            "> Building portfolio...",
-            "> Launching website...",
-            "> Welcome aboard Captain Jasrotia!",
-            "> System ready for deployment"
-        ];
-        
-        let lineIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        
-        function typeTerminal() {
-            const currentLine = codeLines[lineIndex];
             
-            if (!isDeleting && charIndex <= currentLine.length) {
-                terminalCode.textContent = codeLines.slice(0, lineIndex).join('\n') + '\n' + currentLine.substring(0, charIndex) + '<span class="typing-cursor"></span>';
-                charIndex++;
-                setTimeout(typeTerminal, charIndex === currentLine.length + 1 ? 1000 : 50);
-            } else if (isDeleting && charIndex >= 0) {
-                terminalCode.textContent = codeLines.slice(0, lineIndex).join('\n') + '\n' + currentLine.substring(0, charIndex) + '<span class="typing-cursor"></span>';
-                charIndex--;
-                setTimeout(typeTerminal, 30);
-            } else {
-                isDeleting = !isDeleting;
-                lineIndex = !isDeleting ? (lineIndex + 1) % codeLines.length : lineIndex;
-                setTimeout(typeTerminal, 500);
-            }
+            // Make asteroids react to mouse movement
+            document.addEventListener('mousemove', (e) => {
+                const asteroids = document.querySelectorAll('.asteroid');
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                asteroids.forEach(asteroid => {
+                    const rect = asteroid.getBoundingClientRect();
+                    const asteroidX = rect.left + rect.width / 2;
+                    const asteroidY = rect.top + rect.height / 2;
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(mouseX - asteroidX, 2) + 
+                        Math.pow(mouseY - asteroidY, 2)
+                    );
+                    
+                    if (distance < 300) {
+                        const force = (300 - distance) / 30;
+                        const angle = Math.atan2(asteroidY - mouseY, asteroidX - mouseX);
+                        const moveX = Math.cos(angle) * force;
+                        const moveY = Math.sin(angle) * force;
+                        
+                        // Get current transform values
+                        const transform = window.getComputedStyle(asteroid).transform;
+                        const matrix = new DOMMatrix(transform);
+                        
+                        // Apply new translation while preserving existing transform
+                        asteroid.style.transform = `matrix(${matrix.a}, ${matrix.b}, ${matrix.c}, ${matrix.d}, ${matrix.e + moveX}, ${matrix.f + moveY})`;
+                    }
+                });
+            });
         }
         
-        // Set current date
-        function updateDate() {
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true
-            };
-            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        // FAB functionality
+        const fabMain = document.getElementById('fab-main');
+        const fabMenu = document.getElementById('fab-menu');
+        
+        fabMain.addEventListener('click', () => {
+            fabMenu.classList.toggle('open');
+        });
+        
+        // Contact actions
+        function openInstagram() {
+            window.open('https://instagram.com/justjasrotia', '_blank');
         }
         
-        // Start animations
-        setTimeout(() => {
-            typeTerminal();
-            updateDate();
-            setInterval(updateDate, 60000); // Update time every minute
-        }, 1000);
+        function makeCall() {
+            window.location.href = 'tel:+918082218234';
+        }
+        
+        function openWhatsApp() {
+            window.open('https://wa.me/918082218234', '_blank');
+        }
+        
+        function openInstructions() {
+            window.location.href = 'fn.html';
+        }
+        
+        function openContactForm() {
+            // In a real implementation, this would open a contact form modal
+            alert("Contact form would open here. In a real implementation, this would show a modal with a form.");
+        }
+        
+        // Initialize asteroid background
+        window.addEventListener('load', createAsteroidBackground);
     </script>
 </body>
 </html>
